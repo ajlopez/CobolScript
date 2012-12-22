@@ -14,7 +14,7 @@ var cmd = parser.parseCommand();
 
 assert.ok(cmd);
 
-assert.equal('console.log("HELLO, WORLD");', cmd.compile());
+assert.equal('runtime.display("HELLO, WORLD");', cmd.compile());
 
 assert.equal(null, parser.parseCommand());
 
@@ -125,7 +125,7 @@ assert.equal(program.environment.configuration.object_computer, "NODE");
 
 // Parse Identification Division + Environment Division + Empty Data Division + Procedure Division
  
- var parser = new cobs.Parser('\
+var parser = new cobs.Parser('\
 IDENTIFICATION DIVISION.\r\n\
     PROGRAM-ID. HELLO.\r\n\
     AUTHOR. A.J.LOPEZ.\r\n\
@@ -158,5 +158,5 @@ assert.equal(program.environment.configuration.source_computer, "NODE");
 assert.equal(program.environment.configuration.object_computer, "NODE");
 
 assert.ok(program.data);
-assert.ok(program.procedure);
+assert.ok(program.command);
 
