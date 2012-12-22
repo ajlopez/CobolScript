@@ -69,6 +69,13 @@ assert.ok(program);
 assert.ok(program.identification);
 assert.ok(program.identification.program_id);
 assert.equal(program.identification.program_id, "HELLO");
+
+// Parse commands
+
+var parser = new cobs.Parser('display "hello". display "world".');
+
+var commands = parser.parseCommands();
+assert.ok(commands);
  
 // Parse Identification Division
  

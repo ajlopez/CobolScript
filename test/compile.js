@@ -89,3 +89,22 @@ assert.ok(program.data.working_storage);
 var text = program.command.compile(program);
 assert.ok(text);
 assert.ok(text.indexOf('runtime.display(ws.a.items.b);') >= 0);
+
+// simple compile two move commands
+
+var program = cobs.compile('move 1 to a-1. move 2 to a-2.');
+
+program.data = {
+    working_storage: {
+        a_1: null,
+        a_2: null
+    }
+};
+
+assert.ok(program);
+assert.ok(program.command);
+
+var text = program.command.compile(program);
+assert.ok(text);
+assert.ok(text.indexOf('ws.a_1 = 1;') >= 0);
+assert.ok(text.indexOf('ws.a_2 = 2;') >= 0);
