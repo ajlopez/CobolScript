@@ -144,3 +144,21 @@ var result = null;
 cobs.run(text, null, program);
 
 assert.equal(program.data.working_storage.a, 0);
+
+// compile and run multiply 3 by variable
+
+var program = cobs.compile('multiply 3 by a.');
+
+program.data = {
+    working_storage: {
+        a: 2
+    }
+};
+
+var text = program.command.compile(program);
+
+var result = null;
+
+cobs.run(text, null, program);
+
+assert.equal(program.data.working_storage.a, 6);
