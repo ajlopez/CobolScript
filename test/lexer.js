@@ -60,3 +60,19 @@ var lexer = new cobs.Lexer('WORKING-STORAGE');
 assertToken(lexer, 'WORKING-STORAGE', TokenType.Name);
 
 assert.equal(null, lexer.nextToken());
+
+// Get integer number
+
+var lexer = new cobs.Lexer('123');
+
+assertToken(lexer, '123', TokenType.Integer);
+
+assert.equal(null, lexer.nextToken());
+
+// Get integer number with leading zeroes
+
+var lexer = new cobs.Lexer('003');
+
+assertToken(lexer, '003', TokenType.Integer);
+
+assert.equal(null, lexer.nextToken());
