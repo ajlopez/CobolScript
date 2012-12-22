@@ -6,7 +6,7 @@ var cobs = require('../'),
 
 assert.ok(cobs.compile);
 
-// simple compile
+// simple compile display
 
 var program = cobs.compile('display "hello".');
 
@@ -16,6 +16,23 @@ assert.ok(program.command);
 var text = program.command.compile(program);
 assert.ok(text);
 assert.ok(text.indexOf('runtime.display("hello");') >= 0);
+
+// simple compile move
+
+var program = cobs.compile('move 1 to a-1.');
+
+program.data = {
+    working_storage: {
+        a_1: null
+    }
+};
+
+assert.ok(program);
+assert.ok(program.command);
+
+var text = program.command.compile(program);
+assert.ok(text);
+assert.ok(text.indexOf('ws.a_1 = 1;') >= 0);
 
 // compile simple variable
 
