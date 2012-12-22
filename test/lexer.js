@@ -125,6 +125,14 @@ assertToken(lexer, '.', TokenType.Punctuation);
 
 assert.equal(lexer.nextToken(), null);
 
+// Get comma as Punctuation
+
+var lexer = new cobs.Lexer(',');
+
+assertToken(lexer, ',', TokenType.Punctuation);
+
+assert.equal(lexer.nextToken(), null);
+
 // Skip line comment
 
 var lexer = new cobs.Lexer('* This is a line comment \r\nDIVISION');

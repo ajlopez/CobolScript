@@ -108,3 +108,21 @@ var text = program.command.compile(program);
 assert.ok(text);
 assert.ok(text.indexOf('ws.a_1 = 1;') >= 0);
 assert.ok(text.indexOf('ws.a_2 = 2;') >= 0);
+
+// simple compile move to two variables
+
+var program = cobs.compile('move 1 to a-1, a-2.');
+
+program.data = {
+    working_storage: {
+        a_1: null,
+        a_2: null
+    }
+};
+
+assert.ok(program);
+assert.ok(program.command);
+
+var text = program.command.compile(program);
+assert.ok(text);
+assert.ok(text.indexOf('ws.a_1 = ws.a_2 = 1;') >= 0);
