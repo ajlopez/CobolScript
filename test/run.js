@@ -26,3 +26,21 @@ var runtime = {
 cobs.run(text, runtime);
 
 assert.equal(result, "Hello");
+
+// compile and run move
+
+var program = cobs.compile('move 1 to a.');
+
+program.data = {
+    working_storage: {
+        a: null
+    }
+};
+
+var text = program.command.compile(program);
+
+var result = null;
+
+cobs.run(text, null, program);
+
+assert.equal(program.data.working_storage.a, 1);
