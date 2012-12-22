@@ -16,5 +16,3 @@ assert.ok(program.command);
 var text = program.command.compile(program);
 assert.ok(text);
 assert.ok(text.indexOf('runtime.display("hello");') >= 0);
-
-
