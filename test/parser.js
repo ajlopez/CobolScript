@@ -70,7 +70,7 @@ assert.ok(program.identification);
 assert.ok(program.identification.program_id);
 assert.equal(program.identification.program_id, "HELLO");
  
-// Parse Identification Division with Program Id, Author
+// Parse Identification Division
  
  var parser = new cobs.Parser("\
 IDENTIFICATION DIVISION.\r\n\
@@ -91,4 +91,6 @@ assert.equal(program.identification.author, "A.J.LOPEZ");
 assert.equal(program.identification.installation, "TEST");
 assert.equal(program.identification.date_written, "2012-12-22");
 assert.equal(program.identification.date_compiled, "2012-12-22");
-
+ 
+// Parse Identification Division + Environment Division
+ 
