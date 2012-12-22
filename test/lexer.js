@@ -105,6 +105,18 @@ assert.throws(
         return ex == "unclosed string";
     });
 
+// Raise if unexpected character
+
+var lexer = new cobs.Lexer('!');
+
+assert.throws(
+    function() {
+        assertToken(lexer, '!', TokenType.String);
+    },
+    function(ex) {
+        return ex == "unexpected '!'";
+    });
+
 // Get point as Punctuation
 
 var lexer = new cobs.Lexer('.');
