@@ -3,6 +3,14 @@ var cobs = require('../'),
     assert = require('assert');
     
 var TokenType = cobs.TokenType;
+
+function assertToken(lexer, value, type)
+{
+    var token = lexer.nextToken();
+    assert.ok(token);
+    assert.equal(value, token.value);
+    assert.equal(type, token.type);
+}
     
 // Lexer defined
 
@@ -24,10 +32,7 @@ assert.equal(null, lexer.nextToken());
 
 var lexer = new cobs.Lexer('DIVISION');
 
-var token = lexer.nextToken();
-assert.ok(token);
-assert.equal('DIVISION', token.value);
-assert.equal(TokenType.Name, token.type);
+assertToken(lexer, 'DIVISION', TokenType.Name);
 
 assert.equal(null, lexer.nextToken());
 
@@ -35,10 +40,7 @@ assert.equal(null, lexer.nextToken());
 
 var lexer = new cobs.Lexer('ITEM01');
 
-var token = lexer.nextToken();
-assert.ok(token);
-assert.equal('ITEM01', token.value);
-assert.equal(TokenType.Name, token.type);
+assertToken(lexer, 'ITEM01', TokenType.Name);
 
 assert.equal(null, lexer.nextToken());
 
@@ -46,15 +48,8 @@ assert.equal(null, lexer.nextToken());
 
 var lexer = new cobs.Lexer('IDENTIFICATION DIVISION');
 
-var token = lexer.nextToken();
-assert.ok(token);
-assert.equal('IDENTIFICATION', token.value);
-assert.equal(TokenType.Name, token.type);
-
-token = lexer.nextToken();
-assert.ok(token);
-assert.equal('DIVISION', token.value);
-assert.equal(TokenType.Name, token.type);
+assertToken(lexer, 'IDENTIFICATION', TokenType.Name);
+assertToken(lexer, 'DIVISION', TokenType.Name);
 
 assert.equal(null, lexer.nextToken());
 
@@ -62,9 +57,6 @@ assert.equal(null, lexer.nextToken());
 
 var lexer = new cobs.Lexer('WORKING-STORAGE');
 
-var token = lexer.nextToken();
-assert.ok(token);
-assert.equal('WORKING-STORAGE', token.value);
-assert.equal(TokenType.Name, token.type);
+assertToken(lexer, 'WORKING-STORAGE', TokenType.Name);
 
 assert.equal(null, lexer.nextToken());
