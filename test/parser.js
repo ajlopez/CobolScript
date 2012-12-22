@@ -123,5 +123,4 @@ assert.ok(program.environment.configuration);
 assert.equal(program.environment.configuration.source_computer, "NODE");
 assert.equal(program.environment.configuration.object_computer, "NODE");
 
-
 */
