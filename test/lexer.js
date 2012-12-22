@@ -152,3 +152,9 @@ assert.equal(lexer.nextPhrase(), "HELLO");
 var lexer = new cobs.Lexer("   HELLO.\r\n");
 
 assert.equal(lexer.nextPhrase(), "HELLO");
+
+// Get Phrase with inner points
+
+var lexer = new cobs.Lexer("A.J.LOPEZ.\r\n");
+
+assert.equal(lexer.nextPhrase(), "A.J.LOPEZ");
