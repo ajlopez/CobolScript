@@ -34,6 +34,10 @@ TBD
 
 - Samples
 
+## References
+
+[COBOL Tutorial](http://www.mainframegurukul.com/tutorials/programming/cobol/cobol-tutorial.html)
+
 ## Contribution
 
 Feel free to [file issues](https://github.com/ajlopez/CobolScript) and submit

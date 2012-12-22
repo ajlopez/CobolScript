@@ -132,3 +132,11 @@ var lexer = new cobs.Lexer('* This is a line comment \r\nDIVISION');
 assertToken(lexer, 'DIVISION', TokenType.Name);
 
 assert.equal(null, lexer.nextToken());
+
+// Skip two line comments
+
+var lexer = new cobs.Lexer('* This is a line comment \r\n* This is another line comment \r\nDIVISION');
+
+assertToken(lexer, 'DIVISION', TokenType.Name);
+
+assert.equal(null, lexer.nextToken());
