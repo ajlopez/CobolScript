@@ -36,6 +36,14 @@ assertToken(lexer, 'DIVISION', TokenType.Name);
 
 assert.equal(null, lexer.nextToken());
 
+// Get simple name with spaces
+
+var lexer = new cobs.Lexer('  DIVISION  ');
+
+assertToken(lexer, 'DIVISION', TokenType.Name);
+
+assert.equal(null, lexer.nextToken());
+
 // Get simple name with digits
 
 var lexer = new cobs.Lexer('ITEM01');
@@ -76,3 +84,24 @@ var lexer = new cobs.Lexer('003');
 assertToken(lexer, '003', TokenType.Integer);
 
 assert.equal(null, lexer.nextToken());
+
+// Get simple string
+
+var lexer = new cobs.Lexer('"ADAM"');
+
+assertToken(lexer, 'ADAM', TokenType.String);
+
+assert.equal(null, lexer.nextToken());
+
+// Raise if unclosed string
+
+var lexer = new cobs.Lexer('"ADAM');
+
+assert.throws(
+    function() {
+        assertToken(lexer, 'ADAM', TokenType.String);
+    },
+    function(ex) {
+        return ex == "unclosed string";
+    });
+
