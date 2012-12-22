@@ -56,3 +56,17 @@ assert.throws(
         return err == "unexpected 'FOO'";
     }
  );
+ 
+ // Parse Identification Division
+ 
+ var parser = new cobs.Parser("\
+IDENTIFICATION DIVISION.\r\n\
+    PROGRAM-ID. HELLO.");
+
+var program = parser.parseProgram();
+
+assert.ok(program);
+assert.ok(program.identification);
+assert.ok(program.identification.program_id);
+assert.equal(program.identification.program_id, "HELLO");
+

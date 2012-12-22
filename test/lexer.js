@@ -8,8 +8,8 @@ function assertToken(lexer, value, type)
 {
     var token = lexer.nextToken();
     assert.ok(token);
-    assert.equal(value, token.value);
-    assert.equal(type, token.type);
+    assert.equal(token.value, value);
+    assert.equal(token.type, type);
 }
     
 // Lexer defined
@@ -20,13 +20,13 @@ assert.ok(cobs.Lexer);
 
 var lexer = new cobs.Lexer(null);
 
-assert.equal(null, lexer.nextToken());
+assert.equal(lexer.nextToken(), null);
 
 // Null token if empty text
 
 var lexer = new cobs.Lexer('');
 
-assert.equal(null, lexer.nextToken());
+assert.equal(lexer.nextToken(), null);
 
 // Get simple name
 
@@ -34,7 +34,7 @@ var lexer = new cobs.Lexer('DIVISION');
 
 assertToken(lexer, 'DIVISION', TokenType.Name);
 
-assert.equal(null, lexer.nextToken());
+assert.equal(lexer.nextToken(), null);
 
 // Get simple name with spaces
 
@@ -50,7 +50,7 @@ var lexer = new cobs.Lexer('ITEM01');
 
 assertToken(lexer, 'ITEM01', TokenType.Name);
 
-assert.equal(null, lexer.nextToken());
+assert.equal(lexer.nextToken(), null);
 
 // Get two simple names
 
@@ -59,7 +59,7 @@ var lexer = new cobs.Lexer('IDENTIFICATION DIVISION');
 assertToken(lexer, 'IDENTIFICATION', TokenType.Name);
 assertToken(lexer, 'DIVISION', TokenType.Name);
 
-assert.equal(null, lexer.nextToken());
+assert.equal(lexer.nextToken(), null);
 
 // Get name with minus sign
 
@@ -83,7 +83,7 @@ var lexer = new cobs.Lexer('003');
 
 assertToken(lexer, '003', TokenType.Integer);
 
-assert.equal(null, lexer.nextToken());
+assert.equal(lexer.nextToken(), null);
 
 // Get simple string
 
@@ -91,7 +91,7 @@ var lexer = new cobs.Lexer('"ADAM"');
 
 assertToken(lexer, 'ADAM', TokenType.String);
 
-assert.equal(null, lexer.nextToken());
+assert.equal(lexer.nextToken(), null);
 
 // Raise if unclosed string
 
@@ -123,7 +123,7 @@ var lexer = new cobs.Lexer('.');
 
 assertToken(lexer, '.', TokenType.Punctuation);
 
-assert.equal(null, lexer.nextToken());
+assert.equal(lexer.nextToken(), null);
 
 // Skip line comment
 
@@ -131,7 +131,7 @@ var lexer = new cobs.Lexer('* This is a line comment \r\nDIVISION');
 
 assertToken(lexer, 'DIVISION', TokenType.Name);
 
-assert.equal(null, lexer.nextToken());
+assert.equal(lexer.nextToken(), null);
 
 // Skip two line comments
 
@@ -139,4 +139,16 @@ var lexer = new cobs.Lexer('* This is a line comment \r\n* This is another line 
 
 assertToken(lexer, 'DIVISION', TokenType.Name);
 
-assert.equal(null, lexer.nextToken());
+assert.equal(lexer.nextToken(), null);
+
+// Get Phrase
+
+var lexer = new cobs.Lexer("HELLO.");
+
+assert.equal(lexer.nextPhrase(), "HELLO");
+
+// Get Phrase with initial spaces and end of line
+
+var lexer = new cobs.Lexer("   HELLO.\r\n");
+
+assert.equal(lexer.nextPhrase(), "HELLO");
