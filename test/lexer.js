@@ -105,3 +105,10 @@ assert.throws(
         return ex == "unclosed string";
     });
 
+// Get point as Punctuation
+
+var lexer = new cobs.Lexer('.');
+
+assertToken(lexer, '.', TokenType.Punctuation);
+
+assert.equal(null, lexer.nextToken());
