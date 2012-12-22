@@ -162,3 +162,21 @@ var result = null;
 cobs.run(text, null, program);
 
 assert.equal(program.data.working_storage.a, 6);
+
+// compile and run divide 3 into variable
+
+var program = cobs.compile('divide 3 into a.');
+
+program.data = {
+    working_storage: {
+        a: 6
+    }
+};
+
+var text = program.command.compile(program);
+
+var result = null;
+
+cobs.run(text, null, program);
+
+assert.equal(program.data.working_storage.a, 2);
