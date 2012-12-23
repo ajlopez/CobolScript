@@ -39,6 +39,20 @@ var ws = { a: 1 };
 run('add 2 3 to a.', ws);
 assert.equal(ws.a, 6);
 
+// add two values to two variables
+
+var ws = { a: 1, b: 2 };
+run('add 2 3 to a b.', ws);
+assert.equal(ws.a, 6);
+assert.equal(ws.b, 7);
+
+// add two values to two variables with comma
+
+var ws = { a: 1, b: 2 };
+run('add 2 3 to a, b.', ws);
+assert.equal(ws.a, 6);
+assert.equal(ws.b, 7);
+
 // add two variables to variable
 
 var ws = { a: 1, b: 2, c: 3 };
