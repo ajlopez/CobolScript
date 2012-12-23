@@ -126,6 +126,11 @@ assert.ok(text.indexOf('ws.a = x;') >= 0);
 assert.ok(text.indexOf('ws.b = y;') >= 0);
 assert.ok(text.indexOf('};') >= 0);
 
+// function call with arguments
+
+var text = compile('perform procedure1 using a, b.', { a: null, b: null });
+assert.ok(text.indexOf('procedure1(ws.a, ws.b)') >= 0);
+
 // perform procedure
 
 var text = compile('perform procedure1.');
