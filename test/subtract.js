@@ -27,3 +27,10 @@ var ws = { a: 1, b: 2 };
 run('subtract 1 from a b.', ws);
 assert.equal(ws.a, 0);
 assert.equal(ws.b, 1);
+
+// subtract 1 from variable giving variable
+
+var ws = { a: 1, b: 2 };
+run('subtract 1 from a giving b.', ws);
+assert.equal(ws.a, 1);
+assert.equal(ws.b, 0);
