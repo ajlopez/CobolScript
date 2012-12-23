@@ -1,85 +1,54 @@
 
 var cobs = require('../'),
     assert = require('assert');
+    
+function run(text, ws) {
+    var program = cobs.compile(text);
+    
+    if (ws) {
+        program.data = program.data || { };
+        program.data.working_storage = ws;
+    }
+    
+    var text = program.command.compile(program);
+    var runtime = null;
+    cobs.run(text, runtime, program);
+};
 
 // compile and run move
 
-var program = cobs.compile('move 1 to a.');
-
-program.data = {
-    working_storage: {
-        a: null
-    }
-};
-
-var text = program.command.compile(program);
-
-var result = null;
-
-cobs.run(text, null, program);
-
-assert.equal(program.data.working_storage.a, 1);
+var ws = { a: null };
+run('move 1 to a.', ws);
+assert.equal(ws.a, 1);
 
 // compile and run two moves
 
-var program = cobs.compile('move 1 to a. move 2 to b.');
+var ws = { a: null, b: null };
+run('move 1 to a. move 2 to b.', ws);
 
-program.data = {
-    working_storage: {
-        a: null,
-        b: null
-    }
-};
-
-var text = program.command.compile(program);
-
-var result = null;
-
-cobs.run(text, null, program);
-
-assert.equal(program.data.working_storage.a, 1);
-assert.equal(program.data.working_storage.b, 2);
+assert.equal(ws.a, 1);
+assert.equal(ws.b, 2);
 
 // compile and run two moves to nested items
 
-var program = cobs.compile('move 1 to a. move 2 to b.');
-
-program.data = {
-    working_storage: {
+var ws = {
         group: {
             items: {
                 a: null,
                 b: null
             }
         }
-    }
-};
+    };
+        
+run('move 1 to a. move 2 to b.', ws);
 
-var text = program.command.compile(program);
-
-var result = null;
-
-cobs.run(text, null, program);
-
-assert.equal(program.data.working_storage.group.items.a, 1);
-assert.equal(program.data.working_storage.group.items.b, 2);
+assert.equal(ws.group.items.a, 1);
+assert.equal(ws.group.items.b, 2);
 
 // compile and run move to two variables
 
-var program = cobs.compile('move 1 to a, b.');
+var ws = { a: null, b: null };
+run('move 1 to a, b.', ws);
 
-program.data = {
-    working_storage: {
-        a: null,
-        b: null
-    }
-};
-
-var text = program.command.compile(program);
-
-var result = null;
-
-cobs.run(text, null, program);
-
-assert.equal(program.data.working_storage.a, 1);
-assert.equal(program.data.working_storage.b, 1);
+assert.equal(ws.a, 1);
+assert.equal(ws.b, 1);
