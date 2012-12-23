@@ -174,6 +174,10 @@ var lexer = new cobs.Lexer("A.J.LOPEZ.\r\n");
 
 assert.equal(lexer.nextPhrase(), "A.J.LOPEZ");
 
-// Get < as opertator
+// Get comparison operators
 
 getToken('<','<',TokenType.Operator);
+getToken('>','>',TokenType.Operator);
+getToken('=','=',TokenType.Operator);
+getToken('>=','>=',TokenType.Operator);
+getToken('<=','<=',TokenType.Operator);
