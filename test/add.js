@@ -33,4 +33,15 @@ var ws = { a: 1 };
 run('add 2, 3 to a.', ws);
 assert.equal(ws.a, 6);
 
+// add two values to variable
+
+var ws = { a: 1 };
+run('add 2 3 to a.', ws);
+assert.equal(ws.a, 6);
+
+// add two variables to variable
+
+var ws = { a: 1, b: 2, c: 3 };
+run('add b c to a.', ws);
+assert.equal(ws.a, 6);
 
