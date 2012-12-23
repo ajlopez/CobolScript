@@ -30,6 +30,24 @@ var text = compile('display "hello" "world".');
 assert.ok(text);
 assert.ok(text.indexOf('runtime.display("hello", "world");') >= 0);
 
+// display with advancing
+
+var text = compile('display "hello" "world" with advancing.');
+assert.ok(text);
+assert.ok(text.indexOf('runtime.display("hello", "world");') >= 0);
+
+// display with no advancing
+
+var text = compile('display "hello" "world" with no advancing.');
+assert.ok(text);
+assert.ok(text.indexOf('runtime.write("hello", "world");') >= 0);
+
+// display no advancing
+
+var text = compile('display "hello" "world" no advancing.');
+assert.ok(text);
+assert.ok(text.indexOf('runtime.write("hello", "world");') >= 0);
+
 // display two values comma separated
 
 var text = compile('display "hello", "world".');
