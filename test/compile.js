@@ -118,6 +118,14 @@ assert.ok(text.indexOf('ws.a = 1;') >= 0);
 assert.ok(text.indexOf('ws.b = 2;') >= 0);
 assert.ok(text.indexOf('};') >= 0);
 
+// function with parameters
+
+var text = compile('procedure1 using x, y. move x to a. move y to b.', { a: null, b: null });
+assert.ok(text.indexOf('function procedure1(x, y) {') >= 0);
+assert.ok(text.indexOf('ws.a = x;') >= 0);
+assert.ok(text.indexOf('ws.b = y;') >= 0);
+assert.ok(text.indexOf('};') >= 0);
+
 // perform procedure
 
 var text = compile('perform procedure1.');
