@@ -74,3 +74,9 @@ assert.ok(text.indexOf('ws.a_2 = 2;') >= 0);
 var text = compile('move 1 to a-1, a-2.', { a_1: null, a_2: null });
 assert.ok(text);
 assert.ok(text.indexOf('ws.a_1 = ws.a_2 = 1;') >= 0);
+
+// simple function
+
+var text = compile('procedure1.');
+assert.ok(text.indexOf('function procedure1()') >= 0);
+
