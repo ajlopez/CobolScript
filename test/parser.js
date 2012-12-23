@@ -9,13 +9,9 @@ assert.ok(cobs.Parser);
 // Parse simple command
 
 var parser = new cobs.Parser('DISPLAY "HELLO, WORLD".');
-
 var cmd = parser.parseCommand();
-
 assert.ok(cmd);
-
 assert.equal('runtime.display("HELLO, WORLD");', cmd.compile());
-
 assert.equal(null, parser.parseCommand());
 
 // Raise if no point at end
@@ -41,19 +37,6 @@ assert.throws(
     },
     function(err) {
         return err == "unexpected '!'";
-    }
- );
- 
-// Raise if extra name at end
-
-var parser = new cobs.Parser('DISPLAY "HELLO, WORLD" FOO');
-
-assert.throws(
-    function() {
-        parser.parseCommand();
-    },
-    function(err) {
-        return err == "unexpected 'FOO'";
     }
  );
  

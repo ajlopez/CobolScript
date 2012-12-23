@@ -24,6 +24,18 @@ var text = compile('display "hello".');
 assert.ok(text);
 assert.ok(text.indexOf('runtime.display("hello");') >= 0);
 
+// display two values
+
+var text = compile('display "hello" "world".');
+assert.ok(text);
+assert.ok(text.indexOf('runtime.display("hello", "world");') >= 0);
+
+// display two values comma separated
+
+var text = compile('display "hello", "world".');
+assert.ok(text);
+assert.ok(text.indexOf('runtime.display("hello", "world");') >= 0);
+
 // simple compile move
 
 var text = compile('move 1 to a-1.', {a_1: null});
