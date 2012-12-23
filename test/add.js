@@ -15,9 +15,22 @@ function run(text, ws) {
     cobs.run(text, runtime, program);
 };
 
-// compile and run add 1 to variable
+// add 1 to variable
 
 var ws = { a: 1 };
 run('add 1 to a.', ws);
 assert.equal(ws.a, 2);
+
+// add variable to variable
+
+var ws = { a: 1, b: 3 };
+run('add b to a.', ws);
+assert.equal(ws.a, 4);
+
+// add two values with comma to variable
+
+var ws = { a: 1 };
+run('add 2, 3 to a.', ws);
+assert.equal(ws.a, 6);
+
 
