@@ -48,3 +48,10 @@ var ws = { a: 1, b: 3 };
 run('perform procedure1 using 3. procedure1 using x. add x to a. add x to b.', ws);
 assert.equal(ws.a, 4);
 assert.equal(ws.b, 6);
+
+// perform procedure 10 times passing argument
+
+var ws = { k: null, a: 0 };
+run('perform procedure1 using k varying k from 1 to 4. procedure1 using x. add x to a.', ws);
+assert.equal(ws.a, 10);
+assert.equal(ws.k, 5);
