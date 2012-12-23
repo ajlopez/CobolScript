@@ -99,6 +99,13 @@ assert.ok(text);
 assert.ok(text.indexOf('ws.a_1 = 1;') >= 0);
 assert.ok(text.indexOf('ws.a_2 = 2;') >= 0);
 
+// simple compile two move commands without points
+
+var text = compile('move 1 to a-1 move 2 to a-2', { a_1: null, a_2: null });
+assert.ok(text);
+assert.ok(text.indexOf('ws.a_1 = 1;') >= 0);
+assert.ok(text.indexOf('ws.a_2 = 2;') >= 0);
+
 // simple compile move to two variables
 
 var text = compile('move 1 to a-1, a-2.', { a_1: null, a_2: null });
