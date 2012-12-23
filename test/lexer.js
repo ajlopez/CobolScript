@@ -4,6 +4,13 @@ var cobs = require('../'),
     
 var TokenType = cobs.TokenType;
 
+function getToken(text, value, type)
+{
+    var lexer = new cobs.Lexer(text);
+    assertToken(lexer, value, type);
+    assert.equal(lexer.nextToken(), null);
+}
+
 function assertToken(lexer, value, type)
 {
     var token = lexer.nextToken();
@@ -166,3 +173,7 @@ assert.equal(lexer.nextPhrase(), "HELLO");
 var lexer = new cobs.Lexer("A.J.LOPEZ.\r\n");
 
 assert.equal(lexer.nextPhrase(), "A.J.LOPEZ");
+
+// Get < as opertator
+
+getToken('<','<',TokenType.Operator);
