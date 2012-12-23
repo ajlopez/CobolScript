@@ -27,24 +27,6 @@ cobs.run(text, runtime);
 
 assert.equal(result, "Hello");
 
-// compile and run subtract 1 from variable
-
-var program = cobs.compile('subtract 1 from a.');
-
-program.data = {
-    working_storage: {
-        a: 1
-    }
-};
-
-var text = program.command.compile(program);
-
-var result = null;
-
-cobs.run(text, null, program);
-
-assert.equal(program.data.working_storage.a, 0);
-
 // compile and run multiply 3 by variable
 
 var program = cobs.compile('multiply 3 by a.');
