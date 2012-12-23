@@ -161,3 +161,10 @@ assert.ok(text.indexOf('function procedure1() {') >= 0);
 assert.ok(text.indexOf('ws.a = 1;') >= 0);
 assert.ok(text.indexOf('ws.b = 2;') >= 0);
 assert.ok(text.indexOf('};') >= 0);
+
+// if
+
+var text = compile('if a > 0 then move 0 to a.', { a: null });
+assert.ok(text.indexOf('if (ws.a > 0) {') >= 0);
+assert.ok(text.indexOf('ws.a = 0;') >= 0);
+
