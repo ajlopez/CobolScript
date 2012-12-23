@@ -45,3 +45,11 @@ var ws = { a: 1, b: 2, c: 3 };
 run('add b c to a.', ws);
 assert.equal(ws.a, 6);
 
+// add with giving
+
+var ws = { a: 1, b: 2, c: 3 };
+run('add a b giving c.', ws);
+assert.equal(ws.a, 1);
+assert.equal(ws.b, 2);
+assert.equal(ws.c, 3);
+
