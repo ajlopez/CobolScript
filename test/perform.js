@@ -15,22 +15,29 @@ function run(text, ws) {
     cobs.run(text, runtime, program);
 };
 
-// call procedure
+// perform procedure
 
 var ws = { a: 1 };
 run('perform procedure1. procedure1. add 1 to a.', ws);
 assert.equal(ws.a, 2);
 
-// call procedure with two commands
+// perform procedure with two commands
 
 var ws = { a: 1, b: 3 };
 run('perform procedure1. procedure1. add 1 to a. add 2 to b.', ws);
 assert.equal(ws.a, 2);
 assert.equal(ws.b, 5);
 
-// call two procedures
+// perform two procedures
 
 var ws = { a: 1, b: 3 };
 run('perform procedure1. perform procedure2. procedure1. add 1 to a. procedure2. add 2 to b.', ws);
 assert.equal(ws.a, 2);
 assert.equal(ws.b, 5);
+
+// perform procedure 10 times
+
+var ws = { k: null, a: 0 };
+run('perform procedure1 varying k from 1 to 4. procedure1. add k to a.', ws);
+assert.equal(ws.a, 10);
+assert.equal(ws.k, 5);

@@ -131,3 +131,13 @@ assert.ok(text.indexOf('function procedure1() {') >= 0);
 assert.ok(text.indexOf('ws.a = 1;') >= 0);
 assert.ok(text.indexOf('ws.b = 2;') >= 0);
 assert.ok(text.indexOf('};') >= 0);
+
+// perform procedure with varying
+
+var text = compile('perform procedure1 varying k from 1 to 10 by 1. procedure1. move 1 to a. move 2 to b.', { k: null, a: null, b: null });
+assert.ok(text.indexOf('for (ws.k = 1; ws.k <= 10; ws.k++)') >= 0);
+assert.ok(text.indexOf('procedure1();') >= 0);
+assert.ok(text.indexOf('function procedure1() {') >= 0);
+assert.ok(text.indexOf('ws.a = 1;') >= 0);
+assert.ok(text.indexOf('ws.b = 2;') >= 0);
+assert.ok(text.indexOf('};') >= 0);
