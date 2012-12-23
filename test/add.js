@@ -61,9 +61,27 @@ assert.equal(ws.a, 6);
 
 // add with giving
 
-var ws = { a: 1, b: 2, c: 3 };
+var ws = { a: 1, b: 2, c: 10 };
 run('add a b giving c.', ws);
 assert.equal(ws.a, 1);
 assert.equal(ws.b, 2);
 assert.equal(ws.c, 3);
+
+// add with giving to two variables
+
+var ws = { a: 1, b: 2, c: 10, d: 11 };
+run('add a b giving c d.', ws);
+assert.equal(ws.a, 1);
+assert.equal(ws.b, 2);
+assert.equal(ws.c, 3);
+assert.equal(ws.d, 3);
+
+// add with giving to two variables with comma
+
+var ws = { a: 1, b: 2, c: 10, d: 11 };
+run('add a b giving c, d.', ws);
+assert.equal(ws.a, 1);
+assert.equal(ws.b, 2);
+assert.equal(ws.c, 3);
+assert.equal(ws.d, 3);
 
