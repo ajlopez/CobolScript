@@ -21,3 +21,9 @@ var ws = { a: 1 };
 run('subtract 1 from a.', ws);
 assert.equal(ws.a, 0);
 
+// subtract 1 from two variables
+
+var ws = { a: 1, b: 2 };
+run('subtract 1 from a b.', ws);
+assert.equal(ws.a, 0);
+assert.equal(ws.b, 1);
