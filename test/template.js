@@ -22,17 +22,17 @@ assert.ok(cobs.compileTemplate);
 // compile simple text
 
 var text = compile("Hello");
-assert.ok(text.indexOf('runtime.display("Hello");') >= 0);
+assert.ok(text.indexOf('runtime.write("Hello");') >= 0);
 
 // simple text with \r \n
 
 var text = compile("Hello\r\nWorld");
-assert.ok(text.indexOf('runtime.display("Hello\\r\\nWorld");') >= 0);
+assert.ok(text.indexOf('runtime.write("Hello\\r\\nWorld");') >= 0);
 
 // simple text with quotes
 
 var text = compile("Hello\"World\"");
-assert.ok(text.indexOf('runtime.display("Hello\\\"World\\\"");') >= 0);
+assert.ok(text.indexOf('runtime.write("Hello\\\"World\\\"");') >= 0);
 
 // embedded code
 
@@ -44,15 +44,15 @@ assert.ok(text.indexOf("display") == -1);
 
 var text = compile("Hello <# move 1 to a #> world", { a: null });
 assert.ok(text.indexOf("ws.a = 1;") >= 0);
-assert.ok(text.indexOf('runtime.display("Hello ");') >= 0);
-assert.ok(text.indexOf('runtime.display(" world");') >= 0);
+assert.ok(text.indexOf('runtime.write("Hello ");') >= 0);
+assert.ok(text.indexOf('runtime.write(" world");') >= 0);
 
 // text with expression
 
 var text = compile("Hello ${a}", { a: null });
-assert.ok(text.indexOf('runtime.display("Hello ", ws.a);') >= 0);
+assert.ok(text.indexOf('runtime.write("Hello ", ws.a);') >= 0);
 
 // text with expression and text
 
 var text = compile("Hello ${a} World", { a: null });
-assert.ok(text.indexOf('runtime.display("Hello ", ws.a, " World");') >= 0);
+assert.ok(text.indexOf('runtime.write("Hello ", ws.a, " World");') >= 0);

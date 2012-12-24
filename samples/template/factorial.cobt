@@ -1,0 +1,26 @@
+<#
+data division.
+working-storage section.
+01 n.
+
+procedure division.
+#>
+Factorial
+---------
+
+<#
+perform show-factorial varying n from 1 to 10.
+
+show-factorial local result.
+perform factorial using n giving result.
+#>
+${n}!= ${result}
+<#
+.
+factorial using n local m.
+if n = 1 then return n.
+subtract 1 from n giving m.
+perform factorial using m giving m.
+multiply n by m.
+return m.
+#>
