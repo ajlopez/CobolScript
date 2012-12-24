@@ -162,6 +162,14 @@ assert.ok(text.indexOf('ws.a = 1;') >= 0);
 assert.ok(text.indexOf('ws.b = 2;') >= 0);
 assert.ok(text.indexOf('};') >= 0);
 
+// perform procedure with giving
+
+var text = compile('perform procedure1 giving k. procedure1. return 1.', { k: null });
+assert.ok(text.indexOf('ws.k = procedure1();') >= 0);
+assert.ok(text.indexOf('function procedure1() {') >= 0);
+assert.ok(text.indexOf('return 1;') >= 0);
+assert.ok(text.indexOf('};') >= 0);
+
 // if
 
 var text = compile('if a > 0 then move 0 to a.', { a: null });
