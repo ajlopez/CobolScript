@@ -173,9 +173,9 @@ assert.ok(text.indexOf('};') >= 0);
 // perform procedure with giving many variables
 
 var text = compile('perform procedure1 giving k, j. procedure1. return 1.', { k: null, j: null });
-assert.ok(text.indexOf('var aux = procedure1();') >= 0);
-assert.ok(text.indexOf('ws.k = aux;') >= 0);
-assert.ok(text.indexOf('ws.j = aux;') >= 0);
+assert.ok(text.indexOf('var $aux = procedure1();') >= 0);
+assert.ok(text.indexOf('ws.k = $aux;') >= 0);
+assert.ok(text.indexOf('ws.j = $aux;') >= 0);
 assert.ok(text.indexOf('function procedure1() {') >= 0);
 assert.ok(text.indexOf('return 1;') >= 0);
 assert.ok(text.indexOf('};') >= 0);
