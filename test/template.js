@@ -24,12 +24,25 @@ assert.ok(cobs.compileTemplate);
 var text = compile("Hello");
 assert.ok(text.indexOf('runtime.display("Hello");') >= 0);
 
-// compile simple text with \r \n
+// simple text with \r \n
 
 var text = compile("Hello\r\nWorld");
 assert.ok(text.indexOf('runtime.display("Hello\\r\\nWorld");') >= 0);
 
-// compile simple text with quotes
+// simple text with quotes
 
 var text = compile("Hello\"World\"");
 assert.ok(text.indexOf('runtime.display("Hello\\\"World\\\"");') >= 0);
+
+// embedded code
+
+var text = compile("<# move 1 to a. #>", { a: null });
+assert.ok(text.indexOf("ws.a = 1;") >= 0);
+assert.ok(text.indexOf("display") == -1);
+
+// text and embedded code
+
+var text = compile("Hello <# move 1 to a. #> world", { a: null });
+assert.ok(text.indexOf("ws.a = 1;") >= 0);
+assert.ok(text.indexOf('runtime.display("Hello ");') >= 0);
+assert.ok(text.indexOf('runtime.display(" world");') >= 0);
