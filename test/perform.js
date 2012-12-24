@@ -55,3 +55,4 @@ var ws = { k: null, a: 0 };
 run('perform procedure1 using k varying k from 1 to 4. procedure1 using x. add x to a.', ws);
 assert.equal(ws.a, 10);
 assert.equal(ws.k, 5);
+
