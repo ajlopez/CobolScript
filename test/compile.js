@@ -172,12 +172,26 @@ assert.ok(text.indexOf('};') >= 0);
 
 // perform procedure with giving many variables
 
-var text = compile('perform procedure1 giving k, j. procedure1. return 1.', { k: null, j: null });
-assert.ok(text.indexOf('var $aux = procedure1();') >= 0);
+var text = compile('perform procedure-1 giving k, j. procedure-1. return 1.', { k: null, j: null });
+assert.ok(text.indexOf('var $aux = procedure_1();') >= 0);
 assert.ok(text.indexOf('ws.k = $aux;') >= 0);
 assert.ok(text.indexOf('ws.j = $aux;') >= 0);
-assert.ok(text.indexOf('function procedure1() {') >= 0);
+assert.ok(text.indexOf('function procedure_1() {') >= 0);
 assert.ok(text.indexOf('return 1;') >= 0);
+assert.ok(text.indexOf('};') >= 0);
+
+// perform procedure with local
+
+var text = compile('\
+perform procedure-1.\r\n\
+\r\n\
+procedure-1 local a.\r\n\
+move 1 to a.\r\n\
+return a.'
+, { k: null, j: null });
+assert.ok(text.indexOf('procedure_1();') >= 0);
+assert.ok(text.indexOf('function procedure_1() {') >= 0);
+assert.ok(text.indexOf('var a;') >= 0);
 assert.ok(text.indexOf('};') >= 0);
 
 // if
