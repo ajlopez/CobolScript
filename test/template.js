@@ -42,7 +42,17 @@ assert.ok(text.indexOf("display") == -1);
 
 // text and embedded code
 
-var text = compile("Hello <# move 1 to a. #> world", { a: null });
+var text = compile("Hello <# move 1 to a #> world", { a: null });
 assert.ok(text.indexOf("ws.a = 1;") >= 0);
 assert.ok(text.indexOf('runtime.display("Hello ");') >= 0);
 assert.ok(text.indexOf('runtime.display(" world");') >= 0);
+
+// text with expression
+
+var text = compile("Hello ${a}", { a: null });
+assert.ok(text.indexOf('runtime.display("Hello ", ws.a);') >= 0);
+
+// text with expression and text
+
+var text = compile("Hello ${a} World", { a: null });
+assert.ok(text.indexOf('runtime.display("Hello ", ws.a, " World");') >= 0);
