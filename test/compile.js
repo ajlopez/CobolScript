@@ -217,3 +217,9 @@ assert.ok(text.indexOf('return 1;') >= 0);
 
 var text = compile('return.');
 assert.ok(text.indexOf('return;') >= 0);
+
+// move to nested item
+
+var text = compile('move 0 to b in a', { a: { items : { b: null } } });
+assert.ok(text.indexOf('ws.a.items.b = 0;') >= 0);
+
