@@ -168,3 +168,7 @@ var text = compile('if a > 0 then move 0 to a.', { a: null });
 assert.ok(text.indexOf('if (ws.a > 0) {') >= 0);
 assert.ok(text.indexOf('ws.a = 0;') >= 0);
 
+// return
+
+var text = compile('return 1.');
+assert.ok(text.indexOf('return 1;') >= 0);
