@@ -56,3 +56,15 @@ run('perform procedure1 using k varying k from 1 to 4. procedure1 using x. add x
 assert.equal(ws.a, 10);
 assert.equal(ws.k, 5);
 
+// perform with giving and return
+
+var ws = { result: 0 };
+run('perform procedure1 using 3 giving result. procedure1 using n. add 1 to n. return n.', ws);
+assert.equal(ws.result, 4);
+
+// perform factorial with auxiliary parameters
+
+var ws = { result: 0 };
+run('perform factorial using 3 giving result. factorial using n, m. if n = 1 then return n. subtract 1 from n giving m. perform factorial using m giving m. multiply n by m. return m.', ws);
+assert.equal(ws.result, 6);
+
