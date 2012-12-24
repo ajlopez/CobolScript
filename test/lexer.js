@@ -94,11 +94,11 @@ assert.equal(lexer.nextToken(), null);
 
 // Get simple string
 
-var lexer = new cobs.Lexer('"ADAM"');
+getToken('"ADAM"', 'ADAM', TokenType.String);
 
-assertToken(lexer, 'ADAM', TokenType.String);
+// Get simple string with quote
 
-assert.equal(lexer.nextToken(), null);
+getToken('"AD\\\"AM"', 'AD\\\"AM', TokenType.String);
 
 // Raise if unclosed string
 
