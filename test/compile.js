@@ -183,14 +183,22 @@ assert.ok(text.indexOf('};') >= 0);
 // perform procedure with local
 
 var text = compile('\
+procedure division.\r\n\
 perform procedure-1.\r\n\
+perform procedure-2.\r\n\
 \r\n\
 procedure-1 local a.\r\n\
 move 1 to a.\r\n\
+return a.\r\n\
+\r\n\
+procedure-2 local a.\r\n\
+move 2 to a.\r\n\
 return a.'
 , { k: null, j: null });
 assert.ok(text.indexOf('procedure_1();') >= 0);
+assert.ok(text.indexOf('procedure_2();') >= 0);
 assert.ok(text.indexOf('function procedure_1() {') >= 0);
+assert.ok(text.indexOf('function procedure_2() {') >= 0);
 assert.ok(text.indexOf('var a;') >= 0);
 assert.ok(text.indexOf('};') >= 0);
 

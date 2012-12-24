@@ -5,11 +5,11 @@ working-storage section.
 procedure division.
 perform show-factorial varying n from 1 to 10.
 
-show-factorial locals result.
+show-factorial local result.
 perform factorial using n giving result.
 display n "! = " result.
 
-factorial using n locals m.
+factorial using n local m.
 if n = 1 then return n.
 subtract 1 from n giving m.
 perform factorial using m giving m.
