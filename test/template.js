@@ -3,16 +3,14 @@ var cobs = require('../'),
     assert = require('assert');
     
 function compile(text, ws) {
-    var code = cobs.compileTemplate(text);
-    var program = cobs.compileProgram(code);
+    var program = cobs.compileTemplate(text, true);
 
     if (ws) {
         program.data = program.data || { };
         program.data.working_storage = ws;
     }
-    
-    var text = program.command.compile(program);
-    return text;
+
+    return program.compileText();
 }
 
 // compileTemplate defined
