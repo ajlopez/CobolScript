@@ -1,5 +1,6 @@
 
 var cobs = require('../'),
+    path = require('path'),
     assert = require('assert');
     
 function compile(text, ws) {
@@ -10,6 +11,17 @@ function compile(text, ws) {
         program.data.working_storage = ws;
     }
 
+    return program.compileText();
+}
+
+function compileFile(filename, ws) {
+    var program = cobs.compileTemplateFile(filename, true);
+
+    if (ws) {
+        program.data = program.data || { };
+        program.data.working_storage = ws;
+    }
+    
     return program.compileText();
 }
 
@@ -53,4 +65,9 @@ assert.ok(text.indexOf('runtime.write("Hello ", ws.a);') >= 0);
 // text with expression and text
 
 var text = compile("Hello ${a} World", { a: null });
+assert.ok(text.indexOf('runtime.write("Hello ", ws.a, " World");') >= 0);
+
+// text with expression and text from file
+
+var text = compileFile(path.join(__dirname, '/files/hello.cobt'), { a: null });
 assert.ok(text.indexOf('runtime.write("Hello ", ws.a, " World");') >= 0);
