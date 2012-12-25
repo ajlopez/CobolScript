@@ -3,7 +3,7 @@ var cobs = require('../'),
     assert = require('assert');
     
 function compile(code, ws) {
-    var program = cobs.compile(code);
+    var program = cobs.compileProgram(code);
 
     if (ws) {
         program.data = program.data || { };
@@ -14,9 +14,9 @@ function compile(code, ws) {
     return text;
 }
 
-// compile defined
+// compile program defined
 
-assert.ok(cobs.compile);
+assert.ok(cobs.compileProgram);
 
 // simple compile display
 

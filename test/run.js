@@ -12,7 +12,7 @@ assert.equal(3, cobs.run("return 1+2;"));
 
 // compile and run display
 
-var program = cobs.compile('display "Hello".');
+var program = cobs.compileProgram('display "Hello".');
 var text = program.command.compile(program);
 
 var result = null;
@@ -29,7 +29,7 @@ assert.equal(result, "Hello");
 
 // compile and run multiply 3 by variable
 
-var program = cobs.compile('multiply 3 by a.');
+var program = cobs.compileProgram('multiply 3 by a.');
 
 program.data = {
     working_storage: {
@@ -47,7 +47,7 @@ assert.equal(program.data.working_storage.a, 6);
 
 // compile and run divide 3 into variable
 
-var program = cobs.compile('divide 3 into a.');
+var program = cobs.compileProgram('divide 3 into a.');
 
 program.data = {
     working_storage: {

@@ -4,7 +4,7 @@ var cobs = require('../'),
     
 function compile(text, ws) {
     var code = cobs.compileTemplate(text);
-    var program = cobs.compile(code);
+    var program = cobs.compileProgram(code);
 
     if (ws) {
         program.data = program.data || { };
