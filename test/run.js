@@ -23,7 +23,7 @@ var runtime = {
     }
 };
 
-cobs.run(text, runtime);
+program.run(runtime);
 
 assert.equal(result, "Hello");
 
@@ -37,11 +37,11 @@ program.data = {
     }
 };
 
-var text = program.command.compile(program);
+var procedure = program.compileFunction();
 
 var result = null;
 
-cobs.run(text, null, program);
+procedure(null, program);
 
 assert.equal(program.data.working_storage.a, 6);
 
@@ -55,10 +55,10 @@ program.data = {
     }
 };
 
-var text = program.command.compile(program);
+var procedure = program.compileFunction();
 
 var result = null;
 
-cobs.run(text, null, program);
+procedure(null, program);
 
 assert.equal(program.data.working_storage.a, 2);
