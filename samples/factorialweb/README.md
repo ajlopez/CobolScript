@@ -20,5 +20,5 @@ Server started, listening at port 8000
 
 Then launch http://localhost:8000 in your browser. It works!
 
-![Factorial Web Sample](https://raw.github.com/ajlopez/CobolScript/master/images/factorialweb.png)
+![Factorial Web Sample](https://raw.github.com/ajlopez/CobolScript/master/images/factorialweb.jpg)
 
