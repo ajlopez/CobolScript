@@ -240,3 +240,18 @@ assert.ok(text.indexOf('return;') >= 0);
 var text = compile('move 0 to b in a', { a: { b: null } });
 assert.ok(text.indexOf('ws.a.b = 0;') >= 0);
 
+// declare local variable
+
+var text = compile('local a.');
+assert.ok(text.indexOf('var a;') >= 0);
+
+// declare and use local variable
+
+var text = compile('local a. move 1 to a');
+assert.ok(text.indexOf('var a;') >= 0);
+assert.ok(text.indexOf('a = 1;') >= 0);
+
+// declare two local variables
+
+var text = compile('locals a b.');
+assert.ok(text.indexOf('var a, b;') >= 0);
