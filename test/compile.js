@@ -255,3 +255,15 @@ assert.ok(text.indexOf('a = 1;') >= 0);
 
 var text = compile('locals a b.');
 assert.ok(text.indexOf('var a, b;') >= 0);
+
+// declare and use global variable
+
+var text = compile('global a. move 1 to a');
+assert.ok(text.indexOf('var a;') < 0);
+assert.ok(text.indexOf('a = 1;') >= 0);
+
+// compile global invocation
+
+var text = compile('global foo. global require. perform require using "assert" giving foo.');
+assert.ok(text.indexOf('foo = require("assert");') >= 0);
+

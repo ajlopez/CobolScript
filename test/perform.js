@@ -66,3 +66,18 @@ var ws = { result: 0 };
 run('perform factorial using 3 giving result. factorial using n local m. if n = 1 then return n. subtract 1 from n giving m. perform factorial using m giving m. multiply n by m. return m.', ws);
 assert.equal(ws.result, 6);
 
+// perform global function
+
+var result = 1;
+global.foo = function() { result = 2; };
+
+run('global foo. perform foo.');
+assert.equal(result, 2);
+
+// invoke require
+
+global.foo = null;
+global.require = require;
+
+run('global foo. global require. perform require using "assert" giving foo.');
+assert.equal(global.foo, assert);
