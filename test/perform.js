@@ -81,3 +81,22 @@ global.require = require;
 
 run('global foo. global require. perform require using "assert" giving foo.');
 assert.equal(global.foo, assert);
+
+// perform function in global object
+
+var result = 1;
+global.foo = {
+    setresult: function(n) { result = n; }
+};
+
+run('global foo. perform setresult in foo using 2.');
+assert.equal(result, 2);
+
+// perform Math cosine
+
+global.foo = null;
+
+run('global foo. perform cos in Math using 10 giving foo.');
+assert.ok(global.foo);
+assert.equal(global.foo, Math.cos(10));
+

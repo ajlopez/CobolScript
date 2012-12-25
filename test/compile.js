@@ -267,3 +267,8 @@ assert.ok(text.indexOf('a = 1;') >= 0);
 var text = compile('global foo. global require. perform require using "assert" giving foo.');
 assert.ok(text.indexOf('foo = require("assert");') >= 0);
 
+// perform with in
+
+var text = compile('perform func in obj');
+assert.ok(text.indexOf('obj.func()') >= 0);
+
