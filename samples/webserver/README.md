@@ -1,6 +1,6 @@
-# Web Server example
+# Web Server Sample
 
-Shows the use of Node.js modules
+Shows the use of Node.js modules.
 
 ## Setup
 
