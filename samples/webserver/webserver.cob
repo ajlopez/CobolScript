@@ -3,8 +3,6 @@ global require.
 local http.
 local server.
 
-global doget.
-
 perform require using "http" giving http.
 perform createServer in http using doget giving server.
 perform listen in server using 8000.
