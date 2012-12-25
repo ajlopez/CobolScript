@@ -10,11 +10,13 @@ display "<tr><th align='right'>n</th><th align='right'>n!</th></tr>".
 perform show-factorial varying n from 1 to 10.
 display "</table>".
 
-show-factorial local result.
+show-factorial.
+local result.
 perform factorial using n giving result.
 display "<tr><td align='right'>" n "</td><td align='right'>" result "</td></tr>".
 
-factorial using n local m.
+factorial using n.
+local m.
 if n = 1 then return n.
 subtract 1 from n giving m.
 perform factorial using m giving m.

@@ -63,7 +63,7 @@ assert.equal(ws.result, 4);
 // perform factorial with auxiliary parameters
 
 var ws = { result: 0 };
-run('perform factorial using 3 giving result. factorial using n local m. if n = 1 then return n. subtract 1 from n giving m. perform factorial using m giving m. multiply n by m. return m.', ws);
+run('perform factorial using 3 giving result. factorial using n. local m. if n = 1 then return n. subtract 1 from n giving m. perform factorial using m giving m. multiply n by m. return m.', ws);
 assert.equal(ws.result, 6);
 
 // perform global function

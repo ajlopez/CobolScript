@@ -204,11 +204,11 @@ procedure division.\r\n\
 perform procedure-1.\r\n\
 perform procedure-2.\r\n\
 \r\n\
-procedure-1 local a.\r\n\
+procedure-1. local a.\r\n\
 move 1 to a.\r\n\
 return a.\r\n\
 \r\n\
-procedure-2 local a.\r\n\
+procedure-2. local a.\r\n\
 move 2 to a.\r\n\
 return a.'
 , { k: null, j: null });
