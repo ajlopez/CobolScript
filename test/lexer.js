@@ -1,5 +1,5 @@
 
-var cobs = require('../'),
+var cobs = require('../').complete(),
     assert = require('assert');
     
 var TokenType = cobs.TokenType;
