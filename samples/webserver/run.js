@@ -1,0 +1,1 @@
+var cobs = require('../..'),    fs = require('fs');    var runtime = {    display: function(msg) {        console.log(msg);    }}function runFile(filename) {    cobs.compileProgramFile(filename).run(runtime);};// Tricky, doing require globalglobal.require = require;process.argv.forEach(function(val) {    if (val.slice(-4) == ".cob")        runFile(val);});
