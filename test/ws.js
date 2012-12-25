@@ -50,8 +50,8 @@ assert.ok(program);
 assert.ok(program.data);
 assert.ok(program.data.working_storage);
 assert.ok(typeof(program.data.working_storage.group1) != 'undefined');
-assert.ok(typeof(program.data.working_storage.group1.items.item1) != 'undefined');
-assert.ok(typeof(program.data.working_storage.group1.items.item2) != 'undefined');
+assert.ok(typeof(program.data.working_storage.group1.item1) != 'undefined');
+assert.ok(typeof(program.data.working_storage.group1.item2) != 'undefined');
 
 // Working storage with two group items and three levels
  
@@ -74,11 +74,10 @@ assert.ok(program);
 assert.ok(program.data);
 assert.ok(program.data.working_storage);
 assert.ok(program.data.working_storage.group1);
-assert.ok(program.data.working_storage.group1.items.item1);
-assert.ok(program.data.working_storage.group1.items.item1.items);
-assert.ok(typeof(program.data.working_storage.group1.items.item1.items.subitem1) != 'undefined');
-assert.ok(typeof(program.data.working_storage.group1.items.item1.items.subitem2) != 'undefined');
-assert.ok(typeof(program.data.working_storage.group1.items.item2) != 'undefined');
+assert.ok(program.data.working_storage.group1.item1);
+assert.ok(typeof(program.data.working_storage.group1.item1.subitem1) != 'undefined');
+assert.ok(typeof(program.data.working_storage.group1.item1.subitem2) != 'undefined');
+assert.ok(typeof(program.data.working_storage.group1.item2) != 'undefined');
 assert.ok(program.data.working_storage.group2);
-assert.ok(typeof(program.data.working_storage.group2.items.item1) != 'undefined');
-assert.ok(typeof(program.data.working_storage.group2.items.item2) != 'undefined');
+assert.ok(typeof(program.data.working_storage.group2.item1) != 'undefined');
+assert.ok(typeof(program.data.working_storage.group2.item2) != 'undefined');

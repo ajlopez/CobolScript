@@ -90,7 +90,7 @@ procedure division.\r\n\
 display b.\r\n\
 ');
 assert.ok(text);
-assert.ok(text.indexOf('runtime.display(ws.a.items.b);') >= 0);
+assert.ok(text.indexOf('runtime.display(ws.a.b);') >= 0);
 
 // simple compile two move commands
 
@@ -220,6 +220,6 @@ assert.ok(text.indexOf('return;') >= 0);
 
 // move to nested item
 
-var text = compile('move 0 to b in a', { a: { items : { b: null } } });
-assert.ok(text.indexOf('ws.a.items.b = 0;') >= 0);
+var text = compile('move 0 to b in a', { a: { b: null } });
+assert.ok(text.indexOf('ws.a.b = 0;') >= 0);
 
