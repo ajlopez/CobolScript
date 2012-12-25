@@ -3,16 +3,14 @@ var cobs = require('../'),
     assert = require('assert');
     
 function run(text, ws) {
-    var program = cobs.compileProgram(text);
+    var program = cobs.compileProgram(text, true);
     
     if (ws) {
         program.data = program.data || { };
         program.data.working_storage = ws;
     }
     
-    var text = program.command.compile(program);
-    var runtime = null;
-    cobs.run(text, runtime, program);
+    program.compileFunction()(null, program);
 };
 
 // simple if
