@@ -1,9 +1,21 @@
 
 var cobs = require('../'),
+    path = require('path'),
     assert = require('assert');
     
 function compile(code, ws) {
     var program = cobs.compileProgram(code, true);
+
+    if (ws) {
+        program.data = program.data || { };
+        program.data.working_storage = ws;
+    }
+    
+    return program.compileText();
+}
+    
+function compileFile(filename, ws) {
+    var program = cobs.compileProgramFile(filename, true);
 
     if (ws) {
         program.data = program.data || { };
@@ -20,6 +32,12 @@ assert.ok(cobs.compileProgram);
 // simple compile display
 
 var text = compile('display "hello".');
+assert.ok(text);
+assert.ok(text.indexOf('runtime.display("hello");') >= 0);
+
+// simple compile display from file
+
+var text = compileFile(path.join(__dirname, '/files/hello.cob'));
 assert.ok(text);
 assert.ok(text.indexOf('runtime.display("hello");') >= 0);
 
