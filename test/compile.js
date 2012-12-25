@@ -272,3 +272,8 @@ assert.ok(text.indexOf('foo = require("assert");') >= 0);
 var text = compile('perform func in obj');
 assert.ok(text.indexOf('obj.func()') >= 0);
 
+// use a procedure as parameter
+
+var text = compile('perform proc1 using proc2. proc1. return 1. proc2. return 2.');
+assert.ok(text.indexOf('proc1(proc2)') >= 0);
+
