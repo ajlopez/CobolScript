@@ -2,7 +2,7 @@
 global require.
 local http.
 local server.
-* tricky code, declaring a forward procedure, to be reviewed
+
 global doget.
 
 perform require using "http" giving http.
