@@ -49,11 +49,32 @@ npm test
 
 ## Samples
 
-TBD
+[Hello](samples/hello) Simple Hello, world program, without division declarations.
+
+[Hello Program](samples/helloprg) Hello, world program, with identification, environment, data and procedure divisions.
+
+[Hello Web](samples/helloweb) Hello web page. `display` output produces page content.
+
+[Factorial](samples/factorial) Factorial console program, using working storage variable, `perform` with `using` and `giving` and local variables for recursion.
+
+[Factorial Web](samples/factorialweb) Factorial web page.
+
+[Local](samples/local) Using `local` to define a variable, instead of working storage.
+
+[Template](samples/template) Console program using a template. CobolScript can be embedded in text.
+
+[Template Web](samples/templateweb) Web page using a template.
+
+[Web Server](samples/webserver) Accessing Node.js functions, to start a web server and serves a single page.
 
 ## To do
 
-- Samples
+- More Samples
+- Web Site with templates and layout, get and post processing
+- `if` with `else`, `end-if`
+- `perform` inline with `end-perform`, `until`, `with test`.
+- explicit `stop run`.
+- `exit`, `exit perform`.
 
 ## References
 
