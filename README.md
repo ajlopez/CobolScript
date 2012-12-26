@@ -28,15 +28,18 @@ var program = cobolscript.compileProgramFile('./hello.cob');
 
 To run a compiled program:
 ```js
-program.run();
+program.run(cobolscript.getRuntime());
 ```
 
-Some programs need a runtime object that provides helper functions, i.e. `display` implementation.
+Some programs need a runtime object that provides helper functions, i.e. `display` implementation. In the above example, a console-oriented runtime
+object is obtained. 
+
+In web samples, a runtime that uses request, response is used:
 ```js
-program.run(runtime);
+http.createServer(function(req, res) {
+    program.run(cobs.getRuntime({ request: req, response: res }));
+}).listen(8000);
 ```
-
-TBD: discuss runtime.
 
 ## Development
 
