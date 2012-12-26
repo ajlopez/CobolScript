@@ -4,18 +4,39 @@ COBOL language compiler to Javascript. Work in Progress
 
 ## Installation
 
-TBD
-
+Via npm using (Node.js)[http://nodejs.org]:
+```
+npm install basicscript
+```
 
 ## Usage
 
 Reference in your program:
-
 ```js
 var cobolscript = require('cobolscript');
 ```
 
-TBD
+To compile a source code:
+```js
+var program = cobolscript.compileProgram('display "Hello, world".');
+```
+
+To compile a file:
+```js
+var program = cobolscript.compileProgramFile('./hello.cob');
+```
+
+To run a compiled program:
+```js
+program.run();
+```
+
+Some programs need a runtime object that provides helper functions, i.e. `display` implementation.
+```js
+program.run(runtime);
+```
+
+TBD: discuss runtime.
 
 ## Development
 
