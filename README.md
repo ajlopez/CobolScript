@@ -49,23 +49,23 @@ npm test
 
 ## Samples
 
-[Hello](samples/hello) Simple Hello, world program, without division declarations.
+[Hello](https://github.com/ajlopez/CobolScript/tree/master/samples/hello) Simple Hello, world program, without division declarations.
 
-[Hello Program](samples/helloprg) Hello, world program, with identification, environment, data and procedure divisions.
+[Hello Program](https://github.com/ajlopez/CobolScript/tree/master/samples/hellopgm) Hello, world program, with identification, environment, data and procedure divisions.
 
-[Hello Web](samples/helloweb) Hello web page. `display` output produces page content.
+[Hello Web](https://github.com/ajlopez/CobolScript/tree/master/samples/helloweb) Hello web page. `display` output produces page content.
 
-[Factorial](samples/factorial) Factorial console program, using working storage variable, `perform` with `using` and `giving` and local variables for recursion.
+[Factorial](https://github.com/ajlopez/CobolScript/tree/master/samples/factorial) Factorial console program, using working storage variable, `perform` with `using` and `giving` and local variables for recursion.
 
-[Factorial Web](samples/factorialweb) Factorial web page.
+[Factorial Web](https://github.com/ajlopez/CobolScript/tree/master/samples/factorialweb) Factorial web page.
 
-[Local](samples/local) Using `local` to define a variable, instead of working storage.
+[Local](https://github.com/ajlopez/CobolScript/tree/master/samples/local) Using `local` to define a variable, instead of working storage.
 
-[Template](samples/template) Console program using a template. CobolScript can be embedded in text.
+[Template](https://github.com/ajlopez/CobolScript/tree/master/samples/template) Console program using a template. CobolScript can be embedded in text.
 
-[Template Web](samples/templateweb) Web page using a template.
+[Template Web](https://github.com/ajlopez/CobolScript/tree/master/samples/templateweb) Web page using a template.
 
-[Web Server](samples/webserver) Accessing Node.js functions, to start a web server and serves a single page.
+[Web Server](https://github.com/ajlopez/CobolScript/tree/master/samples/webserver) Accessing Node.js functions, to start a web server and serves a single page.
 
 ## To do
 
