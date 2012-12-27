@@ -282,3 +282,12 @@ assert.ok(text.indexOf('proc1(proc2)') >= 0);
 var text = compile('data division. linkage section. 01 a. procedure division. move 1 to a.');
 assert.ok(text.indexOf('runtime.a = 1;') >= 0);
 
+// move an empty object
+
+var text = compile('local a. move object to a.');
+assert.ok(text.indexOf('a = {};') >= 0);
+
+// move an empty array
+
+var text = compile('local a. move array to a.');
+assert.ok(text.indexOf('a = [];') >= 0);
