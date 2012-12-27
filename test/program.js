@@ -26,3 +26,12 @@ var program = cobs.compileProgram('data division. linkage section. procedure div
 assert.ok(program);
 assert.ok(program.data);
 assert.notEqual(typeof program.data.linkage, 'undefined');
+
+// linkage section with item
+
+var program = cobs.compileProgram('data division. linkage section. 01 request. 01 response. procedure division.return.');
+assert.ok(program);
+assert.ok(program.data);
+assert.ok(program.data.linkage);
+assert.notEqual(typeof program.data.linkage.request, 'undefined');
+assert.notEqual(typeof program.data.linkage.response, 'undefined');
