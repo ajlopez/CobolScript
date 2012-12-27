@@ -291,3 +291,9 @@ assert.ok(text.indexOf('a = {};') >= 0);
 
 var text = compile('local a. move array to a.');
 assert.ok(text.indexOf('a = [];') >= 0);
+
+// move to an indexed array by name
+
+var text = compile('local a. move 1 to a("foo")');
+assert.ok(text.indexOf('a["foo"] = 1;') >= 0);
+
