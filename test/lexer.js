@@ -126,35 +126,24 @@ assert.throws(
 
 // Get point as Punctuation
 
-var lexer = new cobs.Lexer('.');
-
-assertToken(lexer, '.', TokenType.Punctuation);
-
-assert.equal(lexer.nextToken(), null);
+getToken('.', '.', TokenType.Punctuation);
 
 // Get comma as Punctuation
 
-var lexer = new cobs.Lexer(',');
+getToken(',', ',', TokenType.Punctuation);
 
-assertToken(lexer, ',', TokenType.Punctuation);
+// Get parenthesis as Punctuation
 
-assert.equal(lexer.nextToken(), null);
+getToken('(', '(', TokenType.Punctuation);
+getToken(')', ')', TokenType.Punctuation);
 
 // Skip line comment
 
-var lexer = new cobs.Lexer('* This is a line comment \r\nDIVISION');
-
-assertToken(lexer, 'DIVISION', TokenType.Name);
-
-assert.equal(lexer.nextToken(), null);
+getToken('* This is a line comment \r\nDIVISION', 'DIVISION', TokenType.Name);
 
 // Skip two line comments
 
-var lexer = new cobs.Lexer('* This is a line comment \r\n* This is another line comment \r\nDIVISION');
-
-assertToken(lexer, 'DIVISION', TokenType.Name);
-
-assert.equal(lexer.nextToken(), null);
+getToken('* This is a line comment \r\n* This is another line comment \r\nDIVISION', 'DIVISION', TokenType.Name);
 
 // Get Phrase
 
