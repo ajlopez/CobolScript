@@ -1,0 +1,1 @@
+var cobs = require('../..'),    http = require('http'),    fs = require('fs');var program = cobs.compileProgramFile('./hello.cob');http.createServer(function(req, res) {    program.run(cobs.getRuntime({ request: req, response: res }));}).listen(8000);console.log('Server started, listening at port 8000');

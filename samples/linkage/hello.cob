@@ -1,0 +1,1 @@
+data division.linkage section.01 request.01 response.procedure division.local content.move object to content.move "text/plain" to content("Content-Type").perform writeHead in response using 200, content.display "Hello, world".
