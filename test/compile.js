@@ -277,3 +277,8 @@ assert.ok(text.indexOf('obj.func()') >= 0);
 var text = compile('perform proc1 using proc2. proc1. return 1. proc2. return 2.');
 assert.ok(text.indexOf('proc1(proc2)') >= 0);
 
+// a linkage item is visible as a runtime field
+
+var text = compile('data division. linkage section. 01 a. procedure division. move 1 to a.');
+assert.ok(text.indexOf('runtime.a = 1;') >= 0);
+
