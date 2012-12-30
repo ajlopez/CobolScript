@@ -39,8 +39,6 @@ local sql.
 move "show columns in " to sql.
 add tablename to sql.
 
-perform log in console using sql.
-
 perform query in connection using sql showtables.
 
 showtables section using err, rows, fields.
@@ -64,11 +62,7 @@ local n.
 move length in rows to n.
 local row.
 local text.
-global console.
 local columnname.
-
-perform dir in console using rows.
-perform dir in console using fields.
 
 local defaultvalue.
 

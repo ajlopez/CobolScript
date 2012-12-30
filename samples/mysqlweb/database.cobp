@@ -48,20 +48,14 @@ move length in rows to n.
 move 0 to k.
 local row.
 local text.
-global console.
 local columnname.
 local databasename.
 move name in params in request to databasename.
 move "Tables_in_" to columnname.
 add databasename to columnname.
 
-perform dir in console using fields.
-
-perform log in console using columnname.
-
 perform varying k from 1 to n
     move rows(k) to row
-    perform dir in console using row
 #>
 <tr>
 <td><a href='/table?name=${row(columnname)}&database=${databasename}'>${row(columnname)}</a></td>
