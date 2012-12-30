@@ -302,3 +302,7 @@ assert.ok(text.indexOf('a = [];') >= 0);
 var text = compile('local a. move 1 to a("foo")');
 assert.ok(text.indexOf('a["foo"] = 1;') >= 0);
 
+// perform with async
+
+var text = compile('perform proc1 async. display "hello"');
+assert.equal(text, 'proc1($cb1); function $cb1() { runtime.display("hello"); }');
