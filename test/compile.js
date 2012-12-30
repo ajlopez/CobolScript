@@ -140,7 +140,7 @@ var text = compile('procedure1. move 1 to a. move 2 to b.', { a: null, b: null }
 assert.ok(text.indexOf('function procedure1() {') >= 0);
 assert.ok(text.indexOf('ws.a = 1;') >= 0);
 assert.ok(text.indexOf('ws.b = 2;') >= 0);
-assert.ok(text.indexOf('};') >= 0);
+assert.ok(text.indexOf('}') >= 0);
 
 // function with parameters
 
@@ -148,7 +148,7 @@ var text = compile('procedure1 using x, y. move x to a. move y to b.', { a: null
 assert.ok(text.indexOf('function procedure1(x, y) {') >= 0);
 assert.ok(text.indexOf('ws.a = x;') >= 0);
 assert.ok(text.indexOf('ws.b = y;') >= 0);
-assert.ok(text.indexOf('};') >= 0);
+assert.ok(text.indexOf('}') >= 0);
 
 // function call with arguments
 
@@ -167,7 +167,7 @@ assert.ok(text.indexOf('procedure1();') >= 0);
 assert.ok(text.indexOf('function procedure1() {') >= 0);
 assert.ok(text.indexOf('ws.a = 1;') >= 0);
 assert.ok(text.indexOf('ws.b = 2;') >= 0);
-assert.ok(text.indexOf('};') >= 0);
+assert.ok(text.indexOf('}') >= 0);
 
 // perform procedure with varying
 
@@ -177,7 +177,7 @@ assert.ok(text.indexOf('procedure1();') >= 0);
 assert.ok(text.indexOf('function procedure1() {') >= 0);
 assert.ok(text.indexOf('ws.a = 1;') >= 0);
 assert.ok(text.indexOf('ws.b = 2;') >= 0);
-assert.ok(text.indexOf('};') >= 0);
+assert.ok(text.indexOf('}') >= 0);
 
 // perform procedure with giving
 
@@ -185,7 +185,7 @@ var text = compile('perform procedure1 giving k. procedure1. return 1.', { k: nu
 assert.ok(text.indexOf('ws.k = procedure1();') >= 0);
 assert.ok(text.indexOf('function procedure1() {') >= 0);
 assert.ok(text.indexOf('return 1;') >= 0);
-assert.ok(text.indexOf('};') >= 0);
+assert.ok(text.indexOf('}') >= 0);
 
 // perform procedure with giving many variables
 
@@ -195,7 +195,7 @@ assert.ok(text.indexOf('ws.k = $aux;') >= 0);
 assert.ok(text.indexOf('ws.j = $aux;') >= 0);
 assert.ok(text.indexOf('function procedure_1() {') >= 0);
 assert.ok(text.indexOf('return 1;') >= 0);
-assert.ok(text.indexOf('};') >= 0);
+assert.ok(text.indexOf('}') >= 0);
 
 // perform procedure with local
 
@@ -217,7 +217,7 @@ assert.ok(text.indexOf('procedure_2();') >= 0);
 assert.ok(text.indexOf('function procedure_1() {') >= 0);
 assert.ok(text.indexOf('function procedure_2() {') >= 0);
 assert.ok(text.indexOf('var a;') >= 0);
-assert.ok(text.indexOf('};') >= 0);
+assert.ok(text.indexOf('}') >= 0);
 
 // if
 
@@ -312,3 +312,8 @@ text = compile('perform proc1 async with error giving a. display "hello". displa
 assert.equal(text, 'proc1($cb1); function $cb1(err, a) { runtime.display("hello"); runtime.display(a); }');
 text = compile('perform proc1 async with error. perform proc2 async with error giving a. display "hello". display a');
 assert.equal(text, 'proc1($cb1); function $cb1(err) { proc2($cb2); function $cb2(err, a) { runtime.display("hello"); runtime.display(a); } }');
+
+// procedure with async
+
+var text = compile('procedure division. local name. perform proc1 async giving name. display "hello " name. proc1 async. return "world"');
+assert.equal(text, 'var name; proc1($cb1); function $cb1(name) { runtime.display("hello ", name); } function proc1($cb) { $cb("world"); return; }'); 
