@@ -332,3 +332,23 @@ assert.equal(text, 'proc1($cb1); function $cb1(err) { proc2($cb2); function $cb2
 
 var text = compile('procedure division. local name. perform proc1 async giving name. display "hello " name. proc1 async. return "world"');
 assert.equal(text, 'var name; proc1($cb1); function $cb1(name) { runtime.display("hello ", name); } function proc1($cb) { $cb("world"); return; }'); 
+
+// perform inline
+
+var text = compile('local a. perform move 1 to a end-perform.');
+assert.equal(text, 'var a; while (true) { a = 1; }');
+
+// perform inline with until
+
+var text = compile('local a. move 1 to a. perform until a > 10 add 1 to a end-perform.');
+assert.equal(text, 'var a; a = 1; while (!(a > 10)) { a = a + 1; }');
+
+// perform inline with until with test first
+
+var text = compile('local a. move 1 to a. perform until a > 10 with test first add 1 to a end-perform.');
+assert.equal(text, 'var a; a = 1; while (!(a > 10)) { a = a + 1; }');
+
+// perform inline with until with test last
+
+var text = compile('local a. move 1 to a. perform until a > 10 with test last add 1 to a end-perform.');
+assert.equal(text, 'var a; a = 1; while (true) { a = a + 1; if (!(a > 10)) break; }');
