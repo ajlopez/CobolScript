@@ -70,6 +70,10 @@ npm test
 
 [Web Server](https://github.com/ajlopez/CobolScript/tree/master/samples/webserver) Accessing Node.js functions, to start a web server and serves a single page.
 
+[Linkage Section](https://github.com/ajlopez/CobolScript/tree/master/samples/linkage) Using linkage section to access provided request, response in web page.
+
+[Asynchronous Hello](https://github.com/ajlopez/CobolScript/tree/master/samples/helloasync) Perform and procedure using the new async reserved word.
+
 ## To do
 
 - More Samples
