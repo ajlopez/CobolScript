@@ -74,6 +74,8 @@ npm test
 
 [Asynchronous Hello](https://github.com/ajlopez/CobolScript/tree/master/samples/helloasync) Perform and procedure using the new async reserved word.
 
+[MySQL](https://github.com/ajlopez/CobolScript/tree/master/samples/mysql) Connecting and using a MySQL server.
+
 ## To do
 
 - More Samples
