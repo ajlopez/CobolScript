@@ -131,12 +131,12 @@ assert.ok(text.indexOf('ws.a_1 = ws.a_2 = 1;') >= 0);
 
 // simple function
 
-var text = compile('procedure1.');
+var text = compile('procedure1 section.');
 assert.ok(text.indexOf('function procedure1()') >= 0);
 
 // function with moves
 
-var text = compile('procedure1. move 1 to a. move 2 to b.', { a: null, b: null });
+var text = compile('procedure1 section. move 1 to a. move 2 to b.', { a: null, b: null });
 assert.ok(text.indexOf('function procedure1() {') >= 0);
 assert.ok(text.indexOf('ws.a = 1;') >= 0);
 assert.ok(text.indexOf('ws.b = 2;') >= 0);
@@ -144,7 +144,7 @@ assert.ok(text.indexOf('}') >= 0);
 
 // function with parameters
 
-var text = compile('procedure1 using x, y. move x to a. move y to b.', { a: null, b: null });
+var text = compile('procedure1 section using x, y. move x to a. move y to b.', { a: null, b: null });
 assert.ok(text.indexOf('function procedure1(x, y) {') >= 0);
 assert.ok(text.indexOf('ws.a = x;') >= 0);
 assert.ok(text.indexOf('ws.b = y;') >= 0);
@@ -162,7 +162,7 @@ assert.ok(text.indexOf('procedure1();') >= 0);
 
 // perform procedure with procedure
 
-var text = compile('perform procedure1. procedure1. move 1 to a. move 2 to b.', { a: null, b: null });
+var text = compile('perform procedure1. procedure1 section. move 1 to a. move 2 to b.', { a: null, b: null });
 assert.ok(text.indexOf('procedure1();') >= 0);
 assert.ok(text.indexOf('function procedure1() {') >= 0);
 assert.ok(text.indexOf('ws.a = 1;') >= 0);
@@ -171,7 +171,7 @@ assert.ok(text.indexOf('}') >= 0);
 
 // perform procedure with varying
 
-var text = compile('perform procedure1 varying k from 1 to 10 by 1. procedure1. move 1 to a. move 2 to b.', { k: null, a: null, b: null });
+var text = compile('perform procedure1 varying k from 1 to 10 by 1. procedure1 section. move 1 to a. move 2 to b.', { k: null, a: null, b: null });
 assert.ok(text.indexOf('for (ws.k = 1; ws.k <= 10; ws.k++)') >= 0);
 assert.ok(text.indexOf('procedure1();') >= 0);
 assert.ok(text.indexOf('function procedure1() {') >= 0);
@@ -181,7 +181,7 @@ assert.ok(text.indexOf('}') >= 0);
 
 // perform procedure with giving
 
-var text = compile('perform procedure1 giving k. procedure1. return 1.', { k: null });
+var text = compile('perform procedure1 giving k. procedure1 section. return 1.', { k: null });
 assert.ok(text.indexOf('ws.k = procedure1();') >= 0);
 assert.ok(text.indexOf('function procedure1() {') >= 0);
 assert.ok(text.indexOf('return 1;') >= 0);
@@ -189,7 +189,7 @@ assert.ok(text.indexOf('}') >= 0);
 
 // perform procedure with giving many variables
 
-var text = compile('perform procedure-1 giving k, j. procedure-1. return 1.', { k: null, j: null });
+var text = compile('perform procedure-1 giving k, j. procedure-1 section. return 1.', { k: null, j: null });
 assert.ok(text.indexOf('var $aux = procedure_1();') >= 0);
 assert.ok(text.indexOf('ws.k = $aux;') >= 0);
 assert.ok(text.indexOf('ws.j = $aux;') >= 0);
@@ -204,11 +204,11 @@ procedure division.\r\n\
 perform procedure-1.\r\n\
 perform procedure-2.\r\n\
 \r\n\
-procedure-1. local a.\r\n\
+procedure-1 section. local a.\r\n\
 move 1 to a.\r\n\
 return a.\r\n\
 \r\n\
-procedure-2. local a.\r\n\
+procedure-2 section. local a.\r\n\
 move 2 to a.\r\n\
 return a.'
 , { k: null, j: null });
@@ -289,7 +289,7 @@ assert.ok(text.indexOf('obj.func()') >= 0);
 
 // use a procedure as parameter
 
-var text = compile('perform proc1 using proc2. proc1. return 1. proc2. return 2.');
+var text = compile('perform proc1 using proc2. proc1 section. return 1. proc2 section. return 2.');
 assert.ok(text.indexOf('proc1(proc2)') >= 0);
 
 // a linkage item is visible as a runtime field
@@ -330,7 +330,7 @@ assert.equal(text, 'proc1($cb1); function $cb1(err) { proc2($cb2); function $cb2
 
 // procedure with async
 
-var text = compile('procedure division. local name. perform proc1 async giving name. display "hello " name. proc1 async. return "world"');
+var text = compile('procedure division. local name. perform proc1 async giving name. display "hello " name. proc1 section async. return "world"');
 assert.equal(text, 'var name; proc1($cb1); function $cb1(name) { runtime.display("hello ", name); } function proc1($cb) { $cb("world"); return; }'); 
 
 // perform inline

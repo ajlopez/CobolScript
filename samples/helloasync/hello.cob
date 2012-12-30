@@ -4,8 +4,8 @@ local name.
 perform getname async giving name.
 display name.
 
-sayhello async.
+sayhello section async.
 display "Hello, " with no advancing.
 
-getname asynchronous.
+getname section asynchronous.
 return "World".

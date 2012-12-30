@@ -4,12 +4,12 @@
 local n.
 perform show-factorial using n varying n from 1 to 10.
 
-show-factorial using n.
+show-factorial section using n.
 local result.
 perform factorial using n giving result.
 display n "! = " result.
 
-factorial using n.
+factorial section using n.
 local m.
 if n = 1 then return n.
 subtract 1 from n giving m.

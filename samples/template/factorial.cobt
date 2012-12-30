@@ -11,14 +11,14 @@ Factorial
 <#
 perform show-factorial varying n from 1 to 10.
 
-show-factorial.
+show-factorial section.
 local result.
 perform factorial using n giving result.
 #>
 ${n}!= ${result}
 <#
 .
-factorial using n.
+factorial section using n.
 local m.
 if n = 1 then return n.
 subtract 1 from n giving m.

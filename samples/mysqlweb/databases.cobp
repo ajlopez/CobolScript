@@ -1,7 +1,12 @@
+<#
+data division.
+linkage section.
+01 require.
+procedure division.
+#>
 <h1>MySQL Databases</h1>
 <p>List of databases at localhost</p>
 <#
-global require.
 local mysql.
 
 perform require using "mysql" giving mysql.
@@ -18,7 +23,7 @@ perform createConnection in mysql using options giving connection.
 
 perform query in connection using "show databases" showdbs.
 
-showdbs using err, rows, fields.
+showdbs section using err, rows, fields.
 if err then 
     display "<h2>" err "</h2>"
     stop run

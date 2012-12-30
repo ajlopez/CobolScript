@@ -11,12 +11,12 @@ perform show-factorial varying n from 1 to 10.
 display "</table>".
 stop run.
 
-show-factorial.
+show-factorial section.
 local result.
 perform factorial using n giving result.
 display "<tr><td align='right'>" n "</td><td align='right'>" result "</td></tr>".
 
-factorial using n.
+factorial section using n.
 local m.
 if n = 1 then return n.
 subtract 1 from n giving m.

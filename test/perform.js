@@ -16,54 +16,54 @@ function run(text, ws) {
 // perform procedure
 
 var ws = { a: 1 };
-run('perform procedure1. procedure1. add 1 to a.', ws);
+run('perform procedure1. procedure1 section. add 1 to a.', ws);
 assert.equal(ws.a, 2);
 
 // perform procedure with two commands
 
 var ws = { a: 1, b: 3 };
-run('perform procedure1. procedure1. add 1 to a. add 2 to b.', ws);
+run('perform procedure1. procedure1 section. add 1 to a. add 2 to b.', ws);
 assert.equal(ws.a, 2);
 assert.equal(ws.b, 5);
 
 // perform two procedures
 
 var ws = { a: 1, b: 3 };
-run('perform procedure1. perform procedure2. procedure1. add 1 to a. procedure2. add 2 to b.', ws);
+run('perform procedure1. perform procedure2. procedure1 section. add 1 to a. procedure2 section. add 2 to b.', ws);
 assert.equal(ws.a, 2);
 assert.equal(ws.b, 5);
 
 // perform procedure 10 times
 
 var ws = { k: null, a: 0 };
-run('perform procedure1 varying k from 1 to 4. procedure1. add k to a.', ws);
+run('perform procedure1 varying k from 1 to 4. procedure1 section. add k to a.', ws);
 assert.equal(ws.a, 10);
 assert.equal(ws.k, 5);
 
 // perform procedure passing argument
 
 var ws = { a: 1, b: 3 };
-run('perform procedure1 using 3. procedure1 using x. add x to a. add x to b.', ws);
+run('perform procedure1 using 3. procedure1 section using x. add x to a. add x to b.', ws);
 assert.equal(ws.a, 4);
 assert.equal(ws.b, 6);
 
 // perform procedure 10 times passing argument
 
 var ws = { k: null, a: 0 };
-run('perform procedure1 using k varying k from 1 to 4. procedure1 using x. add x to a.', ws);
+run('perform procedure1 using k varying k from 1 to 4. procedure1 section using x. add x to a.', ws);
 assert.equal(ws.a, 10);
 assert.equal(ws.k, 5);
 
 // perform with giving and return
 
 var ws = { result: 0 };
-run('perform procedure1 using 3 giving result. procedure1 using n. add 1 to n. return n.', ws);
+run('perform procedure1 using 3 giving result. procedure1 section using n. add 1 to n. return n.', ws);
 assert.equal(ws.result, 4);
 
 // perform factorial with auxiliary parameters
 
 var ws = { result: 0 };
-run('perform factorial using 3 giving result. factorial using n. local m. if n = 1 then return n. subtract 1 from n giving m. perform factorial using m giving m. multiply n by m. return m.', ws);
+run('perform factorial using 3 giving result. factorial section using n. local m. if n = 1 then return n. subtract 1 from n giving m. perform factorial using m giving m. multiply n by m. return m.', ws);
 assert.equal(ws.result, 6);
 
 // perform global function

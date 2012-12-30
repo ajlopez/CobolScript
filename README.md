@@ -90,6 +90,10 @@ npm test
 
 [COBOL Tutorial](http://www.mainframegurukul.com/tutorials/programming/cobol/cobol-tutorial.html)
 
+[COBOL Tutorials](http://www.mainframetutorials.com/programming/programming.cobol.html)
+
+[COBOL Programming Standards](http://www.tonymarston.net/cobol/cobolstandards.html)
+
 ## Contribution
 
 Feel free to [file issues](https://github.com/ajlopez/CobolScript) and submit

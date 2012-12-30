@@ -20,9 +20,9 @@ assert.ok(runtime.flush);
 assert.equal(typeof(runtime.flush), 'function');
 assert.ok(runtime.global);
 
-// getRuntime with response, request
+// getRuntime with response, request, require
 
-var runtime = cobs.getRuntime( { response: {}, request: {} });
+var runtime = cobs.getRuntime( { response: {}, request: {}, require: require });
 
 assert.ok(runtime);
 assert.ok(runtime.display);
@@ -34,4 +34,4 @@ assert.equal(typeof(runtime.flush), 'function');
 assert.ok(runtime.response);
 assert.ok(runtime.request);
 assert.ok(runtime.global);
-
+assert.ok(runtime.require);
