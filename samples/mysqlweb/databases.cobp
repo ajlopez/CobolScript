@@ -4,8 +4,8 @@ linkage section.
 01 require.
 procedure division.
 #>
-<h1>MySQL Databases</h1>
-<p>List of databases at localhost</p>
+<h1>MySQL</h1>
+<h2>Databases</h2>
 <#
 local mysql.
 

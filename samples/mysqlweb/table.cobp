@@ -1,0 +1,98 @@
+<#
+data division.
+linkage section.
+01 request.
+02 response.
+03 require.
+
+procedure division.
+local mysql.
+local tablename.
+local databasename.
+
+move name in params in request to tablename.
+move database in params in request to databasename.
+#>
+<h1>Table ${tablename} in ${databasename}</h1>
+<div>
+<a href='/'>Databases</a>
+<a href='/database?name=${databasename}'>Database</a>
+</div>
+<h2>Columns</h2>
+<#
+
+perform require using "mysql" giving mysql.
+
+local options.
+
+move object to options.
+move "root" to user in options.
+move "" to password in options.
+move databasename to database in options.
+
+local connection.
+
+perform createConnection in mysql using options giving connection.
+
+local sql.
+
+move "show columns in " to sql.
+add tablename to sql.
+
+perform log in console using sql.
+
+perform query in connection using sql showtables.
+
+showtables section using err, rows, fields.
+if err then 
+    display "<h2>" err "</h2>"
+    stop run
+end-if.
+#>
+<table>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Null</th>
+<th>Key</th>
+<th>Default</th>
+<th>Extra</th>
+</tr>
+<#
+local k.
+local n.
+move length in rows to n.
+local row.
+local text.
+global console.
+local columnname.
+
+perform dir in console using rows.
+perform dir in console using fields.
+
+local defaultvalue.
+
+perform varying k from 1 to n
+    move rows(k) to row
+    if default in row then
+        move default in row to defaultvalue
+    else
+        move "null" to defaultvalue
+    end-if
+#>
+<tr>
+<td>${Field in row}</td>
+<td>${Type in row}</td>
+<td>${Null in row}</td>
+<td>${Key in row}</td>
+<td>${defaultvalue}</td>
+<td>${Extra in row}</td>
+</tr>
+<#
+end-perform.
+#>
+</table>
+<#
+.
+stop run.
+#>
