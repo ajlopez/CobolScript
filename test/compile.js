@@ -362,3 +362,9 @@ assert.equal(text, 'var a; var k; a = 0; for (k = 1; k <= 10; k += 1) { a = a + 
 
 var text = compile('stop run.');
 assert.equal(text, 'runtime.stop(0);');
+
+// exit perform
+
+var text = compile('exit perform.');
+assert.equal(text, 'break;');
+

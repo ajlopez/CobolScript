@@ -94,9 +94,22 @@ assert.equal(result, 2);
 
 // perform Math cosine
 
-global.foo = null;
+var ws = { result: null };
+run('perform cos in Math using 10 giving result.', ws);
+assert.ok(ws.result);
+assert.equal(ws.result, Math.cos(10));
 
-run('global foo. perform cos in Math using 10 giving foo.');
-assert.ok(global.foo);
-assert.equal(global.foo, Math.cos(10));
+// perform inline perform
+
+var ws = { result: null };
+run('local k. move 0 to result. perform varying k from 1 to 4 add k to result end-perform.', ws);
+assert.ok(ws.result);
+assert.equal(ws.result, 10);
+
+// perform inline perform
+
+var ws = { result: null };
+run('local k. move 0 to result. perform varying k from 1 to 4 add k to result if k >= 3 then exit perform end-perform.', ws);
+assert.ok(ws.result);
+assert.equal(ws.result, 6);
 
