@@ -1,9 +1,11 @@
 procedure division.
 perform sayhello async.
-perform sayworld async.
+local name.
+perform getname async giving name.
+display name.
 
 sayhello async.
 display "Hello, " with no advancing.
 
-sayworld asynchronous.
-display "World".
+getname asynchronous.
+return "World".
