@@ -225,6 +225,16 @@ var text = compile('if a > 0 then move 0 to a.', { a: null });
 assert.ok(text.indexOf('if (ws.a > 0) {') >= 0);
 assert.ok(text.indexOf('ws.a = 0;') >= 0);
 
+// if with multiple commands
+
+var text = compile('if a > 0 then move 0 to a move 1 to b.', { a: null, b: null });
+assert.equal(text, 'if (ws.a > 0) { ws.a = 0; ws.b = 1; }');
+
+// if with else
+
+var text = compile('if a > 0 then move 0 to a else move 1 to b.', { a: null, b: null });
+assert.equal(text, 'if (ws.a > 0) { ws.a = 0; } else { ws.b = 1; }');
+
 // return with value
 
 var text = compile('return 1.');

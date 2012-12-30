@@ -83,10 +83,8 @@ npm test
 - explicit `stop run`.
 - `exit`, `exit perform`.
 - File section.
-- Linkage section.
 - Pictures.
 - `exec sql`.
-- Asynchronous call, using a procecure as a callback.
 
 ## References
 
