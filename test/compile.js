@@ -127,7 +127,7 @@ assert.ok(text.indexOf('ws.a_2 = 2;') >= 0);
 
 var text = compile('move 1 to a-1, a-2.', { a_1: null, a_2: null });
 assert.ok(text);
-assert.ok(text.indexOf('ws.a_1 = ws.a_2 = 1;') >= 0);
+assert.ok(text.indexOf('var $aux = 1; ws.a_1 = $aux; ws.a_2 = $aux;') >= 0);
 
 // simple function
 
@@ -315,7 +315,7 @@ assert.ok(text.indexOf('a = [];') >= 0);
 // move to an indexed array by name
 
 var text = compile('local a. move 1 to a("foo")');
-assert.ok(text.indexOf('a["foo"] = 1;') >= 0);
+assert.ok(text.indexOf('runtime.setIndex(a, "foo", 1);') >= 0);
 
 // perform with async
 
@@ -357,6 +357,9 @@ assert.equal(text, 'var a; a = 1; while (true) { a = a + 1; if (!(a > 10)) break
 
 var text = compile('local a. local k. move 0 to a. perform varying k from 1 to 10 add k to a end-perform.');
 assert.equal(text, 'var a; var k; a = 0; for (k = 1; k <= 10; k += 1) { a = a + k; }');
+
+var text = compile('local a. local k. local n. move 0 to a. move 10 to n. perform varying k from 1 to n add k to a end-perform.');
+assert.equal(text, 'var a; var k; var n; a = 0; n = 10; for (k = 1; k <= n; k += 1) { a = a + k; }');
 
 // stop run
 

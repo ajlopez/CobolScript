@@ -10,7 +10,7 @@ function run(text, ws) {
         program.data.working_storage = ws;
     }
     
-    return program.compileFunction(program)(null, program);
+    return program.compileFunction(program)(cobs.getRuntime(), program);
 };
 
 // perform procedure
@@ -106,10 +106,23 @@ run('local k. move 0 to result. perform varying k from 1 to 4 add k to result en
 assert.ok(ws.result);
 assert.equal(ws.result, 10);
 
-// perform inline perform
+// perform inline perform with exit perform
 
 var ws = { result: null };
 run('local k. move 0 to result. perform varying k from 1 to 4 add k to result if k >= 3 then exit perform end-perform.', ws);
 assert.ok(ws.result);
 assert.equal(ws.result, 6);
 
+// perform inline perform setting array values
+
+var ws = { a: [1, 2, 3, 4] };
+run('local k. perform varying k from 1 to 4 add 1 to a(k) end-perform.', ws);
+assert.ok(ws.a);
+assert.equal(ws.a.toString(), '2,3,4,5');
+
+var ws = { a: [0, 0, 0, 0], b: [0, 0, 0, 0] };
+run('local k. perform varying k from 1 to 4 move k to a(k) b(k) end-perform.', ws);
+assert.ok(ws.a);
+assert.equal(ws.a.toString(), '1,2,3,4');
+assert.ok(ws.b);
+assert.equal(ws.b.toString(), '1,2,3,4');

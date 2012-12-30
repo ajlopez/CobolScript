@@ -76,12 +76,12 @@ npm test
 
 [MySQL](https://github.com/ajlopez/CobolScript/tree/master/samples/mysql) Connecting and using a MySQL server.
 
+[MySQL Web](https://github.com/ajlopez/CobolScript/tree/master/samples/mysqlweb) Connecting and using a MySQL server, generating web pages.
+
 ## To do
 
 - More Samples
 - Web Site with templates and layout, get and post processing
-- explicit `stop run`.
-- `exit`, `exit perform`.
 - File section.
 - Pictures.
 - `exec sql`.

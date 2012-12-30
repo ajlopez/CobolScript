@@ -38,14 +38,13 @@ move length in rows to n.
 move 0 to k.
 local row.
 
-perform until k >= n
+perform varying k from 1 to n
     move rows(k) to row
 #>
 <tr>
 <td><a href='/database?name=${Database in row}'>${Database in row}</a></td>
 </tr>
 <#
-    add 1 to k
 end-perform
 #>
 </table>
