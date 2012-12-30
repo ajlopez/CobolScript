@@ -235,6 +235,11 @@ assert.equal(text, 'if (ws.a > 0) { ws.a = 0; ws.b = 1; }');
 var text = compile('if a > 0 then move 0 to a else move 1 to b.', { a: null, b: null });
 assert.equal(text, 'if (ws.a > 0) { ws.a = 0; } else { ws.b = 1; }');
 
+// if with else end if
+
+var text = compile('if a > 0 then move 0 to a else move 1 to b end-if move 2 to c.', { a: null, b: null, c: null });
+assert.equal(text, 'if (ws.a > 0) { ws.a = 0; } else { ws.b = 1; } ws.c = 2;');
+
 // return with value
 
 var text = compile('return 1.');

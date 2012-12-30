@@ -78,7 +78,6 @@ npm test
 
 - More Samples
 - Web Site with templates and layout, get and post processing
-- `if` with `else`, `end-if`
 - `perform` inline with `end-perform`, `until`, `with test`.
 - explicit `stop run`.
 - `exit`, `exit perform`.
