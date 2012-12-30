@@ -9,6 +9,7 @@ display "<table>".
 display "<tr><th align='right'>n</th><th align='right'>n!</th></tr>".
 perform show-factorial varying n from 1 to 10.
 display "</table>".
+stop run.
 
 show-factorial.
 local result.

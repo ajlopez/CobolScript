@@ -352,3 +352,8 @@ assert.equal(text, 'var a; a = 1; while (!(a > 10)) { a = a + 1; }');
 
 var text = compile('local a. move 1 to a. perform until a > 10 with test last add 1 to a end-perform.');
 assert.equal(text, 'var a; a = 1; while (true) { a = a + 1; if (!(a > 10)) break; }');
+
+// stop run
+
+var text = compile('stop run.');
+assert.equal(text, 'runtime.stop(0);');

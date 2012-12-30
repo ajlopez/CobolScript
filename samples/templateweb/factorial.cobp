@@ -9,6 +9,7 @@ perform show-factorial using n varying n from 1 to 10.
 </table>
 <#
 .
+stop run.
 
 show-factorial using n.
 local result.
