@@ -1,0 +1,14 @@
+<#
+data division.
+linkage section.
+01 request.
+02 response.
+
+procedure division.
+#>
+<h1>Database ${name in params in request}</h1>
+<#
+.
+stop run.
+#>
+
