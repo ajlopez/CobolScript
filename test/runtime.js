@@ -18,6 +18,7 @@ assert.ok(runtime.write);
 assert.equal(typeof(runtime.write), 'function');
 assert.ok(runtime.flush);
 assert.equal(typeof(runtime.flush), 'function');
+assert.ok(runtime.global);
 
 // getRuntime with response, request
 
@@ -32,5 +33,5 @@ assert.ok(runtime.flush);
 assert.equal(typeof(runtime.flush), 'function');
 assert.ok(runtime.response);
 assert.ok(runtime.request);
-
+assert.ok(runtime.global);
 
