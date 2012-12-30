@@ -306,3 +306,9 @@ assert.ok(text.indexOf('a["foo"] = 1;') >= 0);
 
 var text = compile('perform proc1 async. display "hello"');
 assert.equal(text, 'proc1($cb1); function $cb1() { runtime.display("hello"); }');
+text = compile('perform proc1 async giving a. display "hello". display a');
+assert.equal(text, 'proc1($cb1); function $cb1(a) { runtime.display("hello"); runtime.display(a); }');
+text = compile('perform proc1 async with error giving a. display "hello". display a');
+assert.equal(text, 'proc1($cb1); function $cb1(err, a) { runtime.display("hello"); runtime.display(a); }');
+text = compile('perform proc1 async with error. perform proc2 async with error giving a. display "hello". display a');
+assert.equal(text, 'proc1($cb1); function $cb1(err) { proc2($cb2); function $cb2(err, a) { runtime.display("hello"); runtime.display(a); } }');
