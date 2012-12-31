@@ -81,9 +81,16 @@ npm test
 ## To do
 
 - More Samples
+- Logical operators and expressions
+- IS, NOT
+- Comparison word operators
+- Compute
+- Complex expressions
 - Web Site with templates and layout, get and post processing
-- File section.
 - Pictures.
+- File section.
+- Database section.
+- Copy
 - `exec sql`.
 
 ## References

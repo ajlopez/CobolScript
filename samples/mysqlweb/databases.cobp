@@ -12,15 +12,14 @@ local mysql.
 perform require using "mysql" giving mysql.
 
 local options.
+local connection.
 
 move object to options.
 move "root" to user in options.
 move "" to password in options.
 
-local connection.
-
 perform createConnection in mysql using options giving connection.
-
+perform connect in connection.
 perform query in connection using "show databases" showdbs.
 
 showdbs section using err, rows, fields.
