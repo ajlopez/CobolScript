@@ -6,7 +6,7 @@ COBOL language compiler to Javascript. Work in Progress
 
 Via npm using (Node.js)[http://nodejs.org]:
 ```
-npm install basicscript
+npm install cobolscript
 ```
 
 ## Usage
