@@ -28,11 +28,11 @@ program.data = {
     }
 };
 
-var procedure = program.compileFunction();
+program.procedure = program.compileFunction();
 
 var result = null;
 
-procedure(null, program);
+program.run(null);
 
 assert.equal(program.data.working_storage.a, 6);
 
@@ -46,10 +46,10 @@ program.data = {
     }
 };
 
-var procedure = program.compileFunction();
+program.procedure = program.compileFunction();
 
 var result = null;
 
-procedure(null, program);
+program.run(null);
 
 assert.equal(program.data.working_storage.a, 2);

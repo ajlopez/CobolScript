@@ -10,7 +10,8 @@ function run(text, ws) {
         program.data.working_storage = ws;
     }
     
-    return program.compileFunction()(null, program);
+    program.procedure = program.compileFunction();
+    program.run(null);
 };
 
 // add 1 to variable

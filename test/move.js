@@ -9,8 +9,9 @@ function run(text, ws) {
         program.data = program.data || { };
         program.data.working_storage = ws;
     }
-    
-    program.compileFunction()(null, program);
+
+    program.procedure = program.compileFunction();
+    program.run(null);
 };
 
 // compile and run move

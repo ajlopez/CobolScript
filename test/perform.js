@@ -10,7 +10,8 @@ function run(text, ws) {
         program.data.working_storage = ws;
     }
     
-    return program.compileFunction(program)(cobs.getRuntime(), program);
+    program.procedure = program.compileFunction();
+    program.run(cobs.getRuntime());
 };
 
 // perform procedure

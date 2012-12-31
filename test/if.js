@@ -10,7 +10,8 @@ function run(text, ws) {
         program.data.working_storage = ws;
     }
     
-    program.compileFunction()(null, program);
+    program.procedure = program.compileFunction();
+    program.run(null);
 };
 
 // simple if
