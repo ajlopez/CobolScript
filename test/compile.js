@@ -4,13 +4,7 @@ var cobs = require('../'),
     assert = require('assert');
     
 function compile(code, ws) {
-    var program = cobs.compileProgram(code, true);
-
-    if (ws) {
-        program.data = program.data || { };
-        program.data.working_storage = ws;
-    }
-    
+    var program = cobs.compileProgram(code, ws);
     return program.compileText();
 }
     

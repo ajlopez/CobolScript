@@ -3,13 +3,7 @@ var cobs = require('../'),
     assert = require('assert');
     
 function compile(code, ws) {
-    var program = cobs.compileProgram(code, true);
-
-    if (ws) {
-        program.data = program.data || { };
-        program.data.working_storage = ws;
-    }
-    
+    var program = cobs.compileProgram(code, ws);
     return program.compileText();
 }
 
@@ -138,6 +132,6 @@ assert.equal(text, 'var a; var k; var n; a = 0; n = 10; for (k = 1; k <= n; k +=
 
 // exit perform
 
-var text = compile('exit perform.');
-assert.equal(text, 'break;');
+var text = compile('perform exit perform end-perform.');
+assert.equal(text, 'while (true) { break; }');
 
