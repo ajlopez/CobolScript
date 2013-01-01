@@ -1,0 +1,41 @@
+<#
+data division.
+linkage section.
+01 body.
+01 title.
+procedure division.
+#>
+<html>
+<head>
+<title>${title}</title>
+<link rel='stylesheet' href='/css/bootstrap.css'>
+<link rel='stylesheet' href='/css/styles.css'>
+</head>
+<body>
+
+<div class='navbar'>
+<div class='navbar-inner'>
+<div class='container'>
+<div class='nav'>
+<ul class='nav'>
+<li>
+<a href='/'>Home</a>
+</li>
+<li>
+<a href='/customer'>Customers</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class='content'>
+${body}
+</div>
+
+</body>
+</html>
+<#
+stop run.
+#>

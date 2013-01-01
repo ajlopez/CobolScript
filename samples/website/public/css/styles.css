@@ -1,0 +1,24 @@
+
+.view {
+    min-width: 500px;
+}
+
+.list {
+    min-width: 800px;
+}
+
+.form {
+    min-width: 500px;
+}
+
+.content {
+    margin: 10px;
+}
+
+.actions {
+    margin-bottom: 20px;
+}
+
+.footer {
+    margin: 10px;
+}
