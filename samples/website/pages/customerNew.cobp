@@ -2,6 +2,7 @@
 data division.
 linkage section.
 01 require.
+01 response.
 01 title.
 procedure division.
 move "New Customer" to title.
@@ -16,7 +17,7 @@ move "New Customer" to title.
 <table class="table-striped table-bordered form">
 <tr>
 <td>Name</td>
-<td><input type="text" name="name" /></td>
+<td><input type='text' name='name' /></td>
 </tr>
 <tr>
 <td>Address</td>
@@ -30,6 +31,7 @@ move "New Customer" to title.
 <td colspan=2 align=center><input class='btn btn-primary' type='submit' value='Accept'></td>
 </tr>
 </table>
+</form>
 <#
 stop run.
 #>

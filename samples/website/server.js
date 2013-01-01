@@ -31,6 +31,8 @@ function doMappings() {
     app.get('/customer', makeTemplatePage('./pages/customerList.cobp', layout));
     app.get('/customer/new', makeTemplatePage('./pages/customerNew.cobp', layout));
     app.post('/customer/new', makePage('./pages/customerNew.cob', layout));
+    app.get('/customer/update', makeTemplatePage('./pages/customerUpdate.cobp', layout));
+    app.post('/customer/update', makePage('./pages/customerUpdate.cob', layout));
     app.get('/customer/delete', makePage('./pages/customerDelete.cob', layout));
     app.get('/customer/view', makeTemplatePage('./pages/customerView.cobp', layout));
 }

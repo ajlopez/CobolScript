@@ -2,6 +2,7 @@
 data division.
 linkage section.
 01 require.
+01 response.
 01 title.
 procedure division.
 move "Customers" to title.
@@ -62,5 +63,11 @@ end-perform
 .
 perform end in connection.
 stop run.
+
+set-cache section.
+* Date in the past
+perform set-header using "Expires" "Mon, 20 Feb 1998 07:00:00 GMT".
+
+set-header section.
 #>
 

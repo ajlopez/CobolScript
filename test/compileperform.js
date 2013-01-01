@@ -135,3 +135,12 @@ assert.equal(text, 'var a; var k; var n; a = 0; n = 10; for (k = 1; k <= n; k +=
 var text = compile('perform exit perform end-perform.');
 assert.equal(text, 'while (true) { break; }');
 
+// compile new
+
+var text = compile('perform new in Date.');
+assert.equal(text, 'new Date();');
+
+// compile new and giving
+
+var text = compile('local a. perform new in Date giving a.');
+assert.equal(text, 'var a; a = new Date();');

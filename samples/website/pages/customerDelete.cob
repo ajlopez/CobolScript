@@ -12,10 +12,6 @@ local id.
 
 move id in query in request to id.
 
-global console.
-
-perform log in console using id.
-
 local connection.
 
 perform delete-customer.
@@ -34,13 +30,9 @@ local datavalues.
 move array to datavalues.
 perform push in datavalues using id.
 
-perform dir in console using datavalues.
-
 perform query in connection using "delete from customers where Id = ?" datavalues delete-end.
 
 delete-end section using err, result.
-perform dir in console using err.
-perform dir in console using result.
 if err then
     display "Error".
     stop run.
