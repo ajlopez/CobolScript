@@ -42,14 +42,9 @@ perform push in datavalues using id.
 perform query in connection using "update customers set Name = ?, Address = ?, Notes = ? where Id = ?" datavalues insert-end.
 
 insert-end section using err, result.
-global console.
-perform log in console using "id".
-perform log in console using id.
-perform dir in console using err.
-perform dir in console using result.
 if err then
-    display "Error".
-    stop run.
+    display "Error"
+    stop run
 end-if.
 local location.
 move "/customer/view?id=" to location.

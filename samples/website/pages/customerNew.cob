@@ -40,12 +40,15 @@ perform query in connection using "insert customers set Name = ?, Address = ?, N
 
 insert-end section using err, result.
 if err then
-    display "Error".
-    stop run.
+    display "Error"
+    stop run
 end-if.
+local location.
+move "/customer/view?id=" to location.
+add insertId in result to location.
 local headers.
 move object to headers.
-move "/customer" to headers("Location").
+move location to headers("Location").
 perform writeHead in response using 302 headers.
 perform end in connection.
 stop run.
