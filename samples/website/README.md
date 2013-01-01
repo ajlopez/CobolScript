@@ -1,9 +1,11 @@
-# Simple Web Sample
+# Web Site Sample
 
 CobolScript can access MySQL server using a Node.js module, 
 and listing databases, tables and columns in dynamic web pages. It uses Twitter bootstrap, and SimpleWeb middleware layer.
 
 ## Setup
+
+### Node
 
 Install [Node.js](http://nodejs.org).
 
@@ -12,6 +14,8 @@ Then, execute at command line:
 npm install
 ```
 This command installs the `mysql`, `simpleweb` modules, according to the dependecies described in `package.json` file.
+
+### MySQL
 
 You must create a database `cobolscriptwebsite` in your MySQL database, and then execute the commands at `database.sql`. These
 commands defines the tables and initial data to be used by the sample.
