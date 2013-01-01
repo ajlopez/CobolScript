@@ -47,6 +47,7 @@ local options.
 move object to options.
 move "root" to user in options.
 move "" to password in options.
+move "cobolscriptwebsite" to database options.
 
 local connection.
 
@@ -56,10 +57,20 @@ opens the connection.
 
 The code
 ```
-perform query in connection using "show databases" showdbs.
+perform query in connection using "select Id, Name, Address, Notes from customers order by Id" showcustomers.
 
-showdbs section using err, rows, fields.
+showcustomers section using err, rows, fields.
 * ....
 ```
-pass `showdbs` as a callback to asynchronous method `query` in `connection`. The callbacks accept three parameters.
+pass `showcustomers` as a callback to asynchronous method `query` in `connection`. 
+The callback accept three parameters: `err`, `rows`, `fields`.
+
+When the sql is an update command:
+```
+perform query in connection using "insert customers set Name = ?, Address = ?, Notes = ?" datavalues showcustomers.
+```
+then the callback receives two parameters: `err`, `result`.
+
+The `datavalues` parameters is an array, with the values to be passed to `?` placeholders.
+See [node-sql](https://github.com/felixge/node-mysql) for more detailed information.
 
