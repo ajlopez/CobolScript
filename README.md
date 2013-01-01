@@ -88,7 +88,6 @@ npm test
 - Comparison word operators
 - Compute
 - Complex expressions
-- Web Site with templates and layout, get and post processing
 - Pictures.
 - File section.
 - Database section.
