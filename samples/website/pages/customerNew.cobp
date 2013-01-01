@@ -20,11 +20,11 @@ move "New Customer" to title.
 </tr>
 <tr>
 <td>Address</td>
-<td><textarea></textarea></td>
+<td><textarea name='address'></textarea></td>
 </tr>
 <tr>
 <td>Notes</td>
-<td><textarea></textarea></td>
+<td><textarea name='notes'></textarea></td>
 </tr>
 <tr>
 <td colspan=2 align=center><input class='btn btn-primary' type='submit' value='Accept'></td>

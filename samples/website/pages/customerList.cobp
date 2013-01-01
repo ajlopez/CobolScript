@@ -20,6 +20,9 @@ perform require using "mysql" giving mysql.
 local options.
 local connection.
 
+perform showpage.
+
+showpage section.
 move object to options.
 move "root" to user in options.
 move "" to password in options.
@@ -32,6 +35,7 @@ perform query in connection using "select Id, Name from customers order by Id" s
 showcustomers section using err, rows, fields.
 if err then 
     display "<h2>" err "</h2>"
+    perform end in connection
     stop run
 end-if.
 #>
@@ -56,6 +60,7 @@ end-perform
 </table>
 <#
 .
+perform end in connection.
 stop run.
 #>
 

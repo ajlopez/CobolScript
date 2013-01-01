@@ -24,6 +24,12 @@ procedure division.
 <li>
 <a href='/customer'>Customers</a>
 </li>
+<li>
+<a href='/supplier'>Suppliers</a>
+</li>
+<li>
+<a href='/reload'>Reload</a>
+</li>
 </ul>
 </div>
 </div>
