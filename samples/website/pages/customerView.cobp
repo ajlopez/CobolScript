@@ -3,9 +3,11 @@ data division.
 linkage section.
 01 require.
 01 request.
+01 response.
 01 title.
 procedure division.
 move "Customer" to title.
+perform set-cache.
 local id.
 move id in query in request to id.
 #>
@@ -68,4 +70,20 @@ move rows(1) to row.
 .
 perform end in connection.
 stop run.
+
+set-cache section.
+* Date in the past
+local headers.
+move object to headers.
+move "Mon, 20 Feb 1998 07:00:00 GMT" to headers("Expires").
+local today.
+perform new in Date giving today.
+perform toString in today giving today.
+* Always modified
+move today to headers("Last-modified").
+* HTTP/1.1
+move "no-cache, must-revalidate" to headers("Cache-control").
+* HTTP/1.0
+move "no-cache" to headers("Pragma").
+perform writeHead in response using 200 headers.
 #>

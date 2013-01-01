@@ -6,6 +6,7 @@ linkage section.
 01 title.
 procedure division.
 move "Customers" to title.
+perform set-cache.
 #>
 <h1>Customers</h1>
 
@@ -66,8 +67,18 @@ stop run.
 
 set-cache section.
 * Date in the past
-perform set-header using "Expires" "Mon, 20 Feb 1998 07:00:00 GMT".
-
-set-header section.
+local headers.
+move object to headers.
+move "Mon, 20 Feb 1998 07:00:00 GMT" to headers("Expires").
+local today.
+perform new in Date giving today.
+perform toString in today giving today.
+* Always modified
+move today to headers("Last-modified").
+* HTTP/1.1
+move "no-cache, must-revalidate" to headers("Cache-control").
+* HTTP/1.0
+move "no-cache" to headers("Pragma").
+perform writeHead in response using 200 headers.
 #>
 
