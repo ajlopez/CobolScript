@@ -28,6 +28,7 @@ function makePage(filename) {
 function doMappings() {
     var layout = cobs.compileTemplateFile('./pages/layout.cobp');
     app.get('/', makeTemplatePage('./pages/index.cobp', layout));
+
     app.get('/customer', makeTemplatePage('./pages/customerList.cobp', layout));
     app.get('/customer/new', makeTemplatePage('./pages/customerNew.cobp', layout));
     app.post('/customer/new', makePage('./pages/customerNew.cob', layout));
@@ -35,6 +36,14 @@ function doMappings() {
     app.post('/customer/update', makePage('./pages/customerUpdate.cob', layout));
     app.get('/customer/delete', makePage('./pages/customerDelete.cob', layout));
     app.get('/customer/view', makeTemplatePage('./pages/customerView.cobp', layout));
+
+    app.get('/supplier', makeTemplatePage('./pages/supplierList.cobp', layout));
+    app.get('/supplier/new', makeTemplatePage('./pages/supplierNew.cobp', layout));
+    app.post('/supplier/new', makePage('./pages/supplierNew.cob', layout));
+    app.get('/supplier/update', makeTemplatePage('./pages/supplierUpdate.cobp', layout));
+    app.post('/supplier/update', makePage('./pages/supplierUpdate.cob', layout));
+    app.get('/supplier/delete', makePage('./pages/supplierDelete.cob', layout));
+    app.get('/supplier/view', makeTemplatePage('./pages/supplierView.cobp', layout));
 }
 
 doMappings();

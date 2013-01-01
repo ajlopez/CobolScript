@@ -1,0 +1,72 @@
+<#
+data division.
+linkage section.
+01 require.
+01 request.
+01 title.
+procedure division.
+move "Update Supplier" to title.
+local id.
+move id in query in request to id.
+#>
+<h1>Update Supplier</h1>
+
+<div class='btn-group actions'>
+<a class='btn btn-info' href='/supplier'>Suppliers</a>
+<a class='btn btn-info' href='/supplier/view?id=${id}'>View</a>
+</div>
+
+<#
+local mysql.
+
+perform require using "mysql" giving mysql.
+
+local options.
+local connection.
+
+perform showpage.
+
+showpage section.
+move object to options.
+move "root" to user in options.
+move "" to password in options.
+move "cobolscriptwebsite" to database in options.
+
+perform createConnection in mysql using options giving connection.
+perform connect in connection.
+perform query in connection using "select Id, Name, Address, Notes from suppliers where Id = ?" id showsupplier.
+
+showsupplier section using err, rows, fields.
+if err then 
+    display "<h2>" err "</h2>"
+    perform end in connection
+    stop run
+end-if.
+local row.
+move rows(1) to row.
+#>
+<form action="/supplier/update" method="post">
+<table class="table-striped table-bordered form">
+<tr>
+<td>Name</td>
+<td><input type="text" name="name" value="${Name in row}" /></td>
+</tr>
+<tr>
+<td>Address</td>
+<td><textarea name='address'>${Address in row}</textarea></td>
+</tr>
+<tr>
+<td>Notes</td>
+<td><textarea name='notes'>${Notes in row}</textarea></td>
+</tr>
+<tr>
+<td colspan=2 align=center><input class='btn btn-primary' type='submit' value='Accept'></td>
+</tr>
+</table>
+<input type='hidden' value='${id}' name='id' />
+</form>
+<#
+.
+perform end in connection.
+stop run.
+#>

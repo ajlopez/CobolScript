@@ -1,0 +1,38 @@
+<#
+data division.
+linkage section.
+01 require.
+01 response.
+01 title.
+procedure division.
+move "New Supplier" to title.
+#>
+<h1>New Supplier</h1>
+
+<div class='btn-group actions'>
+<a class='btn btn-info' href='/supplier'>Suppliers</a>
+</div>
+
+<form action="/supplier/new" method="post">
+<table class="table-striped table-bordered form">
+<tr>
+<td>Name</td>
+<td><input type='text' name='name' /></td>
+</tr>
+<tr>
+<td>Address</td>
+<td><textarea name='address'></textarea></td>
+</tr>
+<tr>
+<td>Notes</td>
+<td><textarea name='notes'></textarea></td>
+</tr>
+<tr>
+<td colspan=2 align=center><input class='btn btn-primary' type='submit' value='Accept'></td>
+</tr>
+</table>
+</form>
+<#
+stop run.
+#>
+
