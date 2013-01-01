@@ -1,0 +1,36 @@
+<#
+data division.
+linkage section.
+01 require.
+01 title.
+procedure division.
+move "New Customer" to title.
+#>
+<h1>New Customer</h1>
+
+<div class='btn-group actions'>
+<a class='btn btn-info' href='/customer'>Customers</a>
+</div>
+
+<form action="/customer/new" method="post">
+<table class="table-striped table-bordered form">
+<tr>
+<td>Name</td>
+<td><input type="text" name="name" /></td>
+</tr>
+<tr>
+<td>Address</td>
+<td><textarea></textarea></td>
+</tr>
+<tr>
+<td>Notes</td>
+<td><textarea></textarea></td>
+</tr>
+<tr>
+<td colspan=2 align=center><input class='btn btn-primary' type='submit' value='Accept'></td>
+</tr>
+</table>
+<#
+stop run.
+#>
+
