@@ -94,6 +94,11 @@ npm test
 - Copy
 - `exec sql`.
 
+## Versions
+
+- 0.0.1 Published
+- 0.0.2 Under development, in master
+
 ## References
 
 [COBOL Tutorial](http://www.mainframegurukul.com/tutorials/programming/cobol/cobol-tutorial.html)
