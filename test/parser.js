@@ -1,63 +1,61 @@
 
-var cobs = require('../').complete(),
-    assert = require('assert');
+var cobs = require('../').complete();
 
-// Parser defined
+exports['Parser defined'] = function (test) {
+    test.ok(cobs.Parser);
+};
 
-assert.ok(cobs.Parser);
+exports['Parse simple command'] = function (test) {
+    var parser = new cobs.Parser('DISPLAY "HELLO, WORLD".');
+    var cmd = parser.parseCommand();
+    test.ok(cmd);
+    test.equal('runtime.display("HELLO, WORLD");', cmd.compile());
+    test.equal(null, parser.parseCommand());
+};
 
-// Parse simple command
+exports['No point at end'] = function (test) {
+    var parser = new cobs.Parser('DISPLAY "HELLO, WORLD"');
+    var cmd = parser.parseCommand();
+    test.ok(cmd);
+    test.equal('runtime.display("HELLO, WORLD");', cmd.compile());
+    test.equal(null, parser.parseCommand());
+};
 
-var parser = new cobs.Parser('DISPLAY "HELLO, WORLD".');
-var cmd = parser.parseCommand();
-assert.ok(cmd);
-assert.equal('runtime.display("HELLO, WORLD");', cmd.compile());
-assert.equal(null, parser.parseCommand());
+exports['Raise if extraneous char at end'] = function (test) {
+    var parser = new cobs.Parser('DISPLAY "HELLO, WORLD"!');
 
-// No point at end
-
-var parser = new cobs.Parser('DISPLAY "HELLO, WORLD"');
-var cmd = parser.parseCommand();
-assert.ok(cmd);
-assert.equal('runtime.display("HELLO, WORLD");', cmd.compile());
-assert.equal(null, parser.parseCommand());
-
-// Raise if extraneous char at end
-
-var parser = new cobs.Parser('DISPLAY "HELLO, WORLD"!');
-
-assert.throws(
-    function() {
-        parser.parseCommand();
-    },
-    function(err) {
-        return err == "unexpected '!'";
-    }
- );
+    test.throws(
+        function() {
+            parser.parseCommand();
+        },
+        function(err) {
+            return err == "unexpected '!'";
+        }
+     );
+};
  
-// Parse Identification Division with Program Id
- 
- var parser = new cobs.Parser("\
+exports['Parse Identification Division with Program Id'] = function (test) {
+    var parser = new cobs.Parser("\
 IDENTIFICATION DIVISION.\r\n\
     PROGRAM-ID. HELLO.");
 
-var program = parser.parseProgram();
+    var program = parser.parseProgram();
 
-assert.ok(program);
-assert.ok(program.identification);
-assert.ok(program.identification.program_id);
-assert.equal(program.identification.program_id, "HELLO");
+    test.ok(program);
+    test.ok(program.identification);
+    test.ok(program.identification.program_id);
+    test.equal(program.identification.program_id, "HELLO");
+};
 
-// Parse commands
+exports['Parse commands'] = function (test) {
+    var parser = new cobs.Parser('display "hello". display "world".');
 
-var parser = new cobs.Parser('display "hello". display "world".');
-
-var commands = parser.parseCommands();
-assert.ok(commands);
+    var commands = parser.parseCommands();
+    test.ok(commands);
+};
  
-// Parse Identification Division
- 
- var parser = new cobs.Parser("\
+exports['Parse Identification Division'] = function (test) {
+    var parser = new cobs.Parser("\
 IDENTIFICATION DIVISION.\r\n\
     PROGRAM-ID. HELLO.\r\n\
     AUTHOR. A.J.LOPEZ.\r\n\
@@ -66,20 +64,20 @@ IDENTIFICATION DIVISION.\r\n\
     DATE-COMPILED. 2012-12-22.\r\n\
     ");
 
-var program = parser.parseProgram();
+    var program = parser.parseProgram();
 
-assert.ok(program);
-assert.ok(program.identification);
-assert.ok(program.identification.program_id);
-assert.equal(program.identification.program_id, "HELLO");
-assert.equal(program.identification.author, "A.J.LOPEZ");
-assert.equal(program.identification.installation, "TEST");
-assert.equal(program.identification.date_written, "2012-12-22");
-assert.equal(program.identification.date_compiled, "2012-12-22");
+    test.ok(program);
+    test.ok(program.identification);
+    test.ok(program.identification.program_id);
+    test.equal(program.identification.program_id, "HELLO");
+    test.equal(program.identification.author, "A.J.LOPEZ");
+    test.equal(program.identification.installation, "TEST");
+    test.equal(program.identification.date_written, "2012-12-22");
+    test.equal(program.identification.date_compiled, "2012-12-22");
+};
  
-// Parse Identification Division + Environment Division
- 
-var parser = new cobs.Parser("\
+exports['Parse Identification Division + Environment Division'] = function (test) {
+    var parser = new cobs.Parser("\
 IDENTIFICATION DIVISION.\r\n\
     PROGRAM-ID. HELLO.\r\n\
     AUTHOR. A.J.LOPEZ.\r\n\
@@ -92,25 +90,25 @@ ENVIRONMENT DIVISION.\r\n\
         OBJECT-COMPUTER. NODE.\r\n\
     ");
 
-var program = parser.parseProgram();
+    var program = parser.parseProgram();
 
-assert.ok(program);
-assert.ok(program.identification);
-assert.ok(program.identification.program_id);
-assert.equal(program.identification.program_id, "HELLO");
-assert.equal(program.identification.author, "A.J.LOPEZ");
-assert.equal(program.identification.installation, "TEST");
-assert.equal(program.identification.date_written, "2012-12-22");
-assert.equal(program.identification.date_compiled, "2012-12-22");
+    test.ok(program);
+    test.ok(program.identification);
+    test.ok(program.identification.program_id);
+    test.equal(program.identification.program_id, "HELLO");
+    test.equal(program.identification.author, "A.J.LOPEZ");
+    test.equal(program.identification.installation, "TEST");
+    test.equal(program.identification.date_written, "2012-12-22");
+    test.equal(program.identification.date_compiled, "2012-12-22");
 
-assert.ok(program.environment);
-assert.ok(program.environment.configuration);
-assert.equal(program.environment.configuration.source_computer, "NODE");
-assert.equal(program.environment.configuration.object_computer, "NODE");
+    test.ok(program.environment);
+    test.ok(program.environment.configuration);
+    test.equal(program.environment.configuration.source_computer, "NODE");
+    test.equal(program.environment.configuration.object_computer, "NODE");
+};
 
-// Parse Identification Division + Environment Division + Empty Data Division + Procedure Division
- 
-var parser = new cobs.Parser('\
+exports['Parse Identification Division + Environment Division + Empty Data Division + Procedure Division'] = function (test) { 
+    var parser = new cobs.Parser('\
 IDENTIFICATION DIVISION.\r\n\
     PROGRAM-ID. HELLO.\r\n\
     AUTHOR. A.J.LOPEZ.\r\n\
@@ -126,22 +124,23 @@ PROCEDURE DIVISION.\r\n\
     DISPLAY "HELLO".\r\n\
     ');
 
-var program = parser.parseProgram();
+    var program = parser.parseProgram();
 
-assert.ok(program);
-assert.ok(program.identification);
-assert.ok(program.identification.program_id);
-assert.equal(program.identification.program_id, "HELLO");
-assert.equal(program.identification.author, "A.J.LOPEZ");
-assert.equal(program.identification.installation, "TEST");
-assert.equal(program.identification.date_written, "2012-12-22");
-assert.equal(program.identification.date_compiled, "2012-12-22");
+    test.ok(program);
+    test.ok(program.identification);
+    test.ok(program.identification.program_id);
+    test.equal(program.identification.program_id, "HELLO");
+    test.equal(program.identification.author, "A.J.LOPEZ");
+    test.equal(program.identification.installation, "TEST");
+    test.equal(program.identification.date_written, "2012-12-22");
+    test.equal(program.identification.date_compiled, "2012-12-22");
 
-assert.ok(program.environment);
-assert.ok(program.environment.configuration);
-assert.equal(program.environment.configuration.source_computer, "NODE");
-assert.equal(program.environment.configuration.object_computer, "NODE");
+    test.ok(program.environment);
+    test.ok(program.environment.configuration);
+    test.equal(program.environment.configuration.source_computer, "NODE");
+    test.equal(program.environment.configuration.object_computer, "NODE");
 
-assert.ok(program.data);
-assert.ok(program.command);
+    test.ok(program.data);
+    test.ok(program.command);
+};
 

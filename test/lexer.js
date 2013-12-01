@@ -1,172 +1,171 @@
 
-var cobs = require('../').complete(),
-    assert = require('assert');
+var cobs = require('../').complete();
     
 var TokenType = cobs.TokenType;
 
-function getToken(text, value, type)
+function getToken(text, value, type, test)
 {
     var lexer = new cobs.Lexer(text);
-    assertToken(lexer, value, type);
-    assert.equal(lexer.nextToken(), null);
+    assertToken(lexer, value, type, test);
+    test.equal(lexer.nextToken(), null);
 }
 
-function assertToken(lexer, value, type)
+function assertToken(lexer, value, type, test)
 {
     var token = lexer.nextToken();
-    assert.ok(token);
-    assert.equal(token.value, value);
-    assert.equal(token.type, type);
+    test.ok(token);
+    test.equal(token.value, value);
+    test.equal(token.type, type);
 }
     
-// Lexer defined
+exports['Lexer defined'] = function (test) {
+    test.ok(cobs.Lexer);
+};
 
-assert.ok(cobs.Lexer);
+exports['Null token if null text'] = function (test) {
+    var lexer = new cobs.Lexer(null);
 
-// Null token if null text
+    test.equal(lexer.nextToken(), null);
+};
 
-var lexer = new cobs.Lexer(null);
+exports['Null token if empty text'] = function (test) {
+    var lexer = new cobs.Lexer('');
 
-assert.equal(lexer.nextToken(), null);
+    test.equal(lexer.nextToken(), null);
+};
 
-// Null token if empty text
+exports['Get simple name'] = function (test) {
+    var lexer = new cobs.Lexer('DIVISION');
 
-var lexer = new cobs.Lexer('');
+    assertToken(lexer, 'DIVISION', TokenType.Name, test);
 
-assert.equal(lexer.nextToken(), null);
+    test.equal(lexer.nextToken(), null);
+};
 
-// Get simple name
+exports['Get simple name with spaces'] = function (test) {
+    var lexer = new cobs.Lexer('  DIVISION  ');
 
-var lexer = new cobs.Lexer('DIVISION');
+    assertToken(lexer, 'DIVISION', TokenType.Name, test);
 
-assertToken(lexer, 'DIVISION', TokenType.Name);
+    test.equal(null, lexer.nextToken());
+};
 
-assert.equal(lexer.nextToken(), null);
+exports['Get simple name with digits'] = function (test) {
+    var lexer = new cobs.Lexer('ITEM01');
 
-// Get simple name with spaces
+    assertToken(lexer, 'ITEM01', TokenType.Name, test);
 
-var lexer = new cobs.Lexer('  DIVISION  ');
+    test.equal(lexer.nextToken(), null);
+};
 
-assertToken(lexer, 'DIVISION', TokenType.Name);
+exports['Get two simple names'] = function (test) {
+    var lexer = new cobs.Lexer('IDENTIFICATION DIVISION');
 
-assert.equal(null, lexer.nextToken());
+    assertToken(lexer, 'IDENTIFICATION', TokenType.Name, test);
+    assertToken(lexer, 'DIVISION', TokenType.Name, test);
 
-// Get simple name with digits
+    test.equal(lexer.nextToken(), null);
+};
 
-var lexer = new cobs.Lexer('ITEM01');
+exports['Get name with minus sign'] = function (test) {
+    var lexer = new cobs.Lexer('WORKING-STORAGE');
 
-assertToken(lexer, 'ITEM01', TokenType.Name);
+    assertToken(lexer, 'WORKING-STORAGE', TokenType.Name, test);
 
-assert.equal(lexer.nextToken(), null);
+    test.equal(null, lexer.nextToken());
+};
 
-// Get two simple names
+exports['Get integer number'] = function (test) {
+    var lexer = new cobs.Lexer('123');
 
-var lexer = new cobs.Lexer('IDENTIFICATION DIVISION');
+    assertToken(lexer, '123', TokenType.Integer, test);
 
-assertToken(lexer, 'IDENTIFICATION', TokenType.Name);
-assertToken(lexer, 'DIVISION', TokenType.Name);
+    test.equal(null, lexer.nextToken());
+};
 
-assert.equal(lexer.nextToken(), null);
+exports['Get integer number with leading zeroes'] = function (test) {
+    var lexer = new cobs.Lexer('003');
 
-// Get name with minus sign
+    assertToken(lexer, '003', TokenType.Integer, test);
 
-var lexer = new cobs.Lexer('WORKING-STORAGE');
+    test.equal(lexer.nextToken(), null);
+};
 
-assertToken(lexer, 'WORKING-STORAGE', TokenType.Name);
+exports['Get simple string'] = function (test) {
+    getToken('"ADAM"', 'ADAM', TokenType.String, test);
+};
 
-assert.equal(null, lexer.nextToken());
+exports['Get simple string with quote'] = function (test) {
+    getToken('"AD\\\"AM"', 'AD\\\"AM', TokenType.String, test);
+};
 
-// Get integer number
+exports['Raise if unclosed string'] = function (test) {
+    var lexer = new cobs.Lexer('"ADAM');
 
-var lexer = new cobs.Lexer('123');
+    test.throws(
+        function() {
+            assertToken(lexer, 'ADAM', TokenType.String, test);
+        },
+        function(ex) {
+            return ex == "unclosed string";
+        });
+};
 
-assertToken(lexer, '123', TokenType.Integer);
+exports['Raise if unexpected character'] = function (test) {
+    var lexer = new cobs.Lexer('!');
 
-assert.equal(null, lexer.nextToken());
-
-// Get integer number with leading zeroes
-
-var lexer = new cobs.Lexer('003');
-
-assertToken(lexer, '003', TokenType.Integer);
-
-assert.equal(lexer.nextToken(), null);
-
-// Get simple string
-
-getToken('"ADAM"', 'ADAM', TokenType.String);
-
-// Get simple string with quote
-
-getToken('"AD\\\"AM"', 'AD\\\"AM', TokenType.String);
-
-// Raise if unclosed string
-
-var lexer = new cobs.Lexer('"ADAM');
-
-assert.throws(
-    function() {
-        assertToken(lexer, 'ADAM', TokenType.String);
-    },
-    function(ex) {
-        return ex == "unclosed string";
-    });
-
-// Raise if unexpected character
-
-var lexer = new cobs.Lexer('!');
-
-assert.throws(
-    function() {
-        assertToken(lexer, '!', TokenType.String);
-    },
-    function(ex) {
-        return ex == "unexpected '!'";
-    });
-
-// Get point as Punctuation
-
-getToken('.', '.', TokenType.Punctuation);
-
-// Get comma as Punctuation
-
-getToken(',', ',', TokenType.Punctuation);
-
-// Get parenthesis as Punctuation
-
-getToken('(', '(', TokenType.Punctuation);
-getToken(')', ')', TokenType.Punctuation);
-
-// Skip line comment
-
-getToken('* This is a line comment \r\nDIVISION', 'DIVISION', TokenType.Name);
-
-// Skip two line comments
-
-getToken('* This is a line comment \r\n* This is another line comment \r\nDIVISION', 'DIVISION', TokenType.Name);
-
-// Get Phrase
-
-var lexer = new cobs.Lexer("HELLO.");
-
-assert.equal(lexer.nextPhrase(), "HELLO");
-
-// Get Phrase with initial spaces and end of line
-
-var lexer = new cobs.Lexer("   HELLO.\r\n");
-
-assert.equal(lexer.nextPhrase(), "HELLO");
-
-// Get Phrase with inner points
-
-var lexer = new cobs.Lexer("A.J.LOPEZ.\r\n");
-
-assert.equal(lexer.nextPhrase(), "A.J.LOPEZ");
-
-// Get comparison operators
-
-getToken('<','<',TokenType.Operator);
-getToken('>','>',TokenType.Operator);
-getToken('=','=',TokenType.Operator);
-getToken('>=','>=',TokenType.Operator);
-getToken('<=','<=',TokenType.Operator);
+    test.throws(
+        function() {
+            assertToken(lexer, '!', TokenType.String, test);
+        },
+        function(ex) {
+            return ex == "unexpected '!'";
+        });
+};
+
+exports['Get point as Punctuation'] = function (test) {
+    getToken('.', '.', TokenType.Punctuation, test);
+};
+
+exports['Get comma as Punctuation'] = function (test) {
+    getToken(',', ',', TokenType.Punctuation, test);
+};
+
+exports['Get parenthesis as Punctuation'] = function (test) {
+    getToken('(', '(', TokenType.Punctuation, test);
+    getToken(')', ')', TokenType.Punctuation, test);
+};
+
+exports['Skip line comment'] = function (test) {
+    getToken('* This is a line comment \r\nDIVISION', 'DIVISION', TokenType.Name, test);
+};
+
+exports['Skip two line comments'] = function (test) {
+    getToken('* This is a line comment \r\n* This is another line comment \r\nDIVISION', 'DIVISION', TokenType.Name, test);
+};
+
+exports['Get Phrase'] = function (test) {
+    var lexer = new cobs.Lexer("HELLO.");
+
+    test.equal(lexer.nextPhrase(), "HELLO");
+};
+
+exports['Get Phrase with initial spaces and end of line'] = function (test) {
+    var lexer = new cobs.Lexer("   HELLO.\r\n");
+
+    test.equal(lexer.nextPhrase(), "HELLO");
+};
+
+exports['Get Phrase with inner points'] = function (test) {
+    var lexer = new cobs.Lexer("A.J.LOPEZ.\r\n");
+
+    test.equal(lexer.nextPhrase(), "A.J.LOPEZ");
+};
+
+exports['Get comparison operators'] = function (test) {
+    getToken('<','<',TokenType.Operator, test);
+    getToken('>','>',TokenType.Operator, test);
+    getToken('=','=',TokenType.Operator, test);
+    getToken('>=','>=',TokenType.Operator, test);
+    getToken('<=','<=',TokenType.Operator, test);
+};

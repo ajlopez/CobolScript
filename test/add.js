@@ -1,6 +1,5 @@
 
-var cobs = require('../'),
-    assert = require('assert');
+var cobs = require('../');
     
 function run(text, ws) {
     var program = cobs.compileProgram(text, ws);
@@ -8,73 +7,73 @@ function run(text, ws) {
     return data.working_storage;
 };
 
-// add 1 to variable
+exports['add 1 to variable'] = function (test) {
+    var ws = { a: 1 };
+    var newws = run('add 1 to a.', ws);
+    test.equal(newws.a, 2);
+}
 
-var ws = { a: 1 };
-var newws = run('add 1 to a.', ws);
-assert.equal(newws.a, 2);
+exports['add variable to variable'] = function (test) {
+    var ws = { a: 1, b: 3 };
+    var newws = run('add b to a.', ws);
+    test.equal(newws.a, 4);
+}
 
-// add variable to variable
+exports['add two values with comma to variable'] = function (test) {
+    var ws = { a: 1 };
+    var newws = run('add 2, 3 to a.', ws);
+    test.equal(newws.a, 6);
+}
 
-var ws = { a: 1, b: 3 };
-var newws = run('add b to a.', ws);
-assert.equal(newws.a, 4);
+exports['add two values to variable'] = function (test) {
+    var ws = { a: 1 };
+    var newws = run('add 2 3 to a.', ws);
+    test.equal(newws.a, 6);
+}
 
-// add two values with comma to variable
+exports['add two values to two variables'] = function (test) {
+    var ws = { a: 1, b: 2 };
+    var newws = run('add 2 3 to a b.', ws);
+    test.equal(newws.a, 6);
+    test.equal(newws.b, 7);
+}
 
-var ws = { a: 1 };
-var newws = run('add 2, 3 to a.', ws);
-assert.equal(newws.a, 6);
+exports['add two values to two variables with comma'] = function (test) {
+    var ws = { a: 1, b: 2 };
+    var newws = run('add 2 3 to a, b.', ws);
+    test.equal(newws.a, 6);
+    test.equal(newws.b, 7);
+}
 
-// add two values to variable
+exports['add two variables to variable'] = function (test) {
+    var ws = { a: 1, b: 2, c: 3 };
+    var newws = run('add b c to a.', ws);
+    test.equal(newws.a, 6);
+}
 
-var ws = { a: 1 };
-var newws = run('add 2 3 to a.', ws);
-assert.equal(newws.a, 6);
+exports['add with giving'] = function (test) {
+    var ws = { a: 1, b: 2, c: 10 };
+    var newws = run('add a b giving c.', ws);
+    test.equal(newws.a, 1);
+    test.equal(newws.b, 2);
+    test.equal(newws.c, 3);
+}
 
-// add two values to two variables
+exports['add with giving to two variables'] = function (test) {
+    var ws = { a: 1, b: 2, c: 10, d: 11 };
+    var newws = run('add a b giving c d.', ws);
+    test.equal(newws.a, 1);
+    test.equal(newws.b, 2);
+    test.equal(newws.c, 3);
+    test.equal(newws.d, 3);
+}
 
-var ws = { a: 1, b: 2 };
-var newws = run('add 2 3 to a b.', ws);
-assert.equal(newws.a, 6);
-assert.equal(newws.b, 7);
-
-// add two values to two variables with comma
-
-var ws = { a: 1, b: 2 };
-var newws = run('add 2 3 to a, b.', ws);
-assert.equal(newws.a, 6);
-assert.equal(newws.b, 7);
-
-// add two variables to variable
-
-var ws = { a: 1, b: 2, c: 3 };
-var newws = run('add b c to a.', ws);
-assert.equal(newws.a, 6);
-
-// add with giving
-
-var ws = { a: 1, b: 2, c: 10 };
-var newws = run('add a b giving c.', ws);
-assert.equal(newws.a, 1);
-assert.equal(newws.b, 2);
-assert.equal(newws.c, 3);
-
-// add with giving to two variables
-
-var ws = { a: 1, b: 2, c: 10, d: 11 };
-var newws = run('add a b giving c d.', ws);
-assert.equal(newws.a, 1);
-assert.equal(newws.b, 2);
-assert.equal(newws.c, 3);
-assert.equal(newws.d, 3);
-
-// add with giving to two variables with comma
-
-var ws = { a: 1, b: 2, c: 10, d: 11 };
-var newws = run('add a b giving c, d.', ws);
-assert.equal(newws.a, 1);
-assert.equal(newws.b, 2);
-assert.equal(newws.c, 3);
-assert.equal(newws.d, 3);
+exports['add with giving to two variables with comma'] = function (test) {
+    var ws = { a: 1, b: 2, c: 10, d: 11 };
+    var newws = run('add a b giving c, d.', ws);
+    test.equal(newws.a, 1);
+    test.equal(newws.b, 2);
+    test.equal(newws.c, 3);
+    test.equal(newws.d, 3);
+}
 

@@ -1,6 +1,5 @@
 
-var cobs = require('../'),
-    assert = require('assert');
+var cobs = require('../');
     
 function run(text, ws) {
     var program = cobs.compileProgram(text, ws);
@@ -8,43 +7,44 @@ function run(text, ws) {
     return data.working_storage;
 };
 
-// subtract 1 from variable
+exports['subtract 1 from variable'] = function (test) {
+    var ws = { a: 1 };
+    var newws = run('subtract 1 from a.', ws);
+    test.equal(ws.a, 1);
+    test.equal(newws.a, 0);
+};
 
-var ws = { a: 1 };
-var newws = run('subtract 1 from a.', ws);
-assert.equal(ws.a, 1);
-assert.equal(newws.a, 0);
+exports['subtract 1 from two variables'] = function (test) {
+    var ws = { a: 1, b: 2 };
+    var newws = run('subtract 1 from a b.', ws);
+    test.equal(ws.a, 1);
+    test.equal(ws.b, 2);
+    test.equal(newws.a, 0);
+    test.equal(newws.b, 1);
+};
 
-// subtract 1 from two variables
+exports['subtract 1 from variable giving variable'] = function (test) {
+    var ws = { a: 1, b: 2 };
+    var newws = run('subtract 1 from a giving b.', ws);
+    test.equal(ws.a, 1);
+    test.equal(ws.b, 2);
+    test.equal(newws.a, 1);
+    test.equal(newws.b, 0);
+};
 
-var ws = { a: 1, b: 2 };
-var newws = run('subtract 1 from a b.', ws);
-assert.equal(ws.a, 1);
-assert.equal(ws.b, 2);
-assert.equal(newws.a, 0);
-assert.equal(newws.b, 1);
+exports['subtract 1 from variable giving to two variables'] = function (test) {
+    var ws = { a: 1, b: 2, c: 3 };
+    var newws = run('subtract 1 from a giving b c.', ws);
+    test.equal(newws.a, 1);
+    test.equal(newws.b, 0);
+    test.equal(newws.c, 0);
+};
 
-// subtract 1 from variable giving variable
+exports['subtract 1 + 2 from variable giving to two variables'] = function (test) {
+    var ws = { a: 1, b: 2, c: 3 };
+    var newws = run('subtract 1 2 from a giving b c.', ws);
+    test.equal(newws.a, 1);
+    test.equal(newws.b, -2);
+    test.equal(newws.c, -2);
+};
 
-var ws = { a: 1, b: 2 };
-var newws = run('subtract 1 from a giving b.', ws);
-assert.equal(ws.a, 1);
-assert.equal(ws.b, 2);
-assert.equal(newws.a, 1);
-assert.equal(newws.b, 0);
-
-// subtract 1 from variable giving to two variables
-
-var ws = { a: 1, b: 2, c: 3 };
-var newws = run('subtract 1 from a giving b c.', ws);
-assert.equal(newws.a, 1);
-assert.equal(newws.b, 0);
-assert.equal(newws.c, 0);
-
-// subtract 1 + 2 from variable giving to two variables
-
-var ws = { a: 1, b: 2, c: 3 };
-var newws = run('subtract 1 2 from a giving b c.', ws);
-assert.equal(newws.a, 1);
-assert.equal(newws.b, -2);
-assert.equal(newws.c, -2);

@@ -1,42 +1,40 @@
 
-var cobs = require('../').complete(),
-    assert = require('assert');
+var cobs = require('../').complete();
 
-// Working storage with one variable
- 
-var parser = new cobs.Parser('\
+exports['Working storage with one variable'] = function (test) {
+    var parser = new cobs.Parser('\
 DATA DIVISION.\r\n\
 WORKING-STORAGE SECTION.\r\n\
 01 ITEM.\r\n\
     ');
 
-var program = parser.parseProgram();
+    var program = parser.parseProgram();
 
-assert.ok(program);
-assert.ok(program.data);
-assert.ok(program.data.working_storage);
-assert.ok(typeof(program.data.working_storage.item) != 'undefined');
+    test.ok(program);
+    test.ok(program.data);
+    test.ok(program.data.working_storage);
+    test.ok(typeof(program.data.working_storage.item) != 'undefined');
+};
 
-// Working storage with two variables
- 
-var parser = new cobs.Parser('\
+exports['Working storage with two variables'] = function (test) {
+    var parser = new cobs.Parser('\
 DATA DIVISION.\r\n\
 WORKING-STORAGE SECTION.\r\n\
 01 ITEM1.\r\n\
 01 ITEM2.\r\n\
     ');
 
-var program = parser.parseProgram();
+    var program = parser.parseProgram();
 
-assert.ok(program);
-assert.ok(program.data);
-assert.ok(program.data.working_storage);
-assert.ok(typeof(program.data.working_storage.item1) != 'undefined');
-assert.ok(typeof(program.data.working_storage.item2) != 'undefined');
+    test.ok(program);
+    test.ok(program.data);
+    test.ok(program.data.working_storage);
+    test.ok(typeof(program.data.working_storage.item1) != 'undefined');
+    test.ok(typeof(program.data.working_storage.item2) != 'undefined');
+};
 
-// Working storage with group item and two subitems
- 
-var parser = new cobs.Parser('\
+exports['Working storage with group item and two subitems'] = function (test) {
+    var parser = new cobs.Parser('\
 DATA DIVISION.\r\n\
 WORKING-STORAGE SECTION.\r\n\
 01 GROUP1.\r\n\
@@ -44,18 +42,18 @@ WORKING-STORAGE SECTION.\r\n\
 02 ITEM2.\r\n\
     ');
 
-var program = parser.parseProgram();
+    var program = parser.parseProgram();
 
-assert.ok(program);
-assert.ok(program.data);
-assert.ok(program.data.working_storage);
-assert.ok(typeof(program.data.working_storage.group1) != 'undefined');
-assert.ok(typeof(program.data.working_storage.group1.item1) != 'undefined');
-assert.ok(typeof(program.data.working_storage.group1.item2) != 'undefined');
+    test.ok(program);
+    test.ok(program.data);
+    test.ok(program.data.working_storage);
+    test.ok(typeof(program.data.working_storage.group1) != 'undefined');
+    test.ok(typeof(program.data.working_storage.group1.item1) != 'undefined');
+    test.ok(typeof(program.data.working_storage.group1.item2) != 'undefined');
+};
 
-// Working storage with two group items and three levels
- 
-var parser = new cobs.Parser('\
+exports['Working storage with two group items and three levels'] = function (test) {
+    var parser = new cobs.Parser('\
 DATA DIVISION.\r\n\
 WORKING-STORAGE SECTION.\r\n\
 01 GROUP1.\r\n\
@@ -68,16 +66,18 @@ WORKING-STORAGE SECTION.\r\n\
 02 ITEM2.\r\n\
     ');
 
-var program = parser.parseProgram();
+    var program = parser.parseProgram();
 
-assert.ok(program);
-assert.ok(program.data);
-assert.ok(program.data.working_storage);
-assert.ok(program.data.working_storage.group1);
-assert.ok(program.data.working_storage.group1.item1);
-assert.ok(typeof(program.data.working_storage.group1.item1.subitem1) != 'undefined');
-assert.ok(typeof(program.data.working_storage.group1.item1.subitem2) != 'undefined');
-assert.ok(typeof(program.data.working_storage.group1.item2) != 'undefined');
-assert.ok(program.data.working_storage.group2);
-assert.ok(typeof(program.data.working_storage.group2.item1) != 'undefined');
-assert.ok(typeof(program.data.working_storage.group2.item2) != 'undefined');
+    test.ok(program);
+    test.ok(program.data);
+    test.ok(program.data.working_storage);
+    test.ok(program.data.working_storage.group1);
+    test.ok(program.data.working_storage.group1.item1);
+    test.ok(typeof(program.data.working_storage.group1.item1.subitem1) != 'undefined');
+    test.ok(typeof(program.data.working_storage.group1.item1.subitem2) != 'undefined');
+    test.ok(typeof(program.data.working_storage.group1.item2) != 'undefined');
+    test.ok(program.data.working_storage.group2);
+    test.ok(typeof(program.data.working_storage.group2.item1) != 'undefined');
+    test.ok(typeof(program.data.working_storage.group2.item2) != 'undefined');
+};
+

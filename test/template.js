@@ -1,7 +1,6 @@
 
 var cobs = require('../'),
-    path = require('path'),
-    assert = require('assert');
+    path = require('path');
     
 function compile(text, ws) {
     var program = cobs.compileTemplate(text, true);
@@ -25,49 +24,50 @@ function compileFile(filename, ws) {
     return program.compileText();
 }
 
-// compileTemplate defined
+exports['compileTemplate defined'] = function (test) {
+    test.ok(cobs.compileTemplate);
+};
 
-assert.ok(cobs.compileTemplate);
+exports['compile simple text'] = function (test) {
+    var text = compile("Hello");
+    test.ok(text.indexOf('runtime.write("Hello");') >= 0);
+};
 
-// compile simple text
+exports['simple text with \r \n'] = function (test) {
+    var text = compile("Hello\r\nWorld");
+    test.ok(text.indexOf('runtime.write("Hello\\r\\nWorld");') >= 0);
+};
 
-var text = compile("Hello");
-assert.ok(text.indexOf('runtime.write("Hello");') >= 0);
+exports['simple text with quotes'] = function (test) {
+    var text = compile("Hello\"World\"");
+    test.ok(text.indexOf('runtime.write("Hello\\\"World\\\"");') >= 0);
+};
 
-// simple text with \r \n
+exports['embedded code'] = function (test) {
+    var text = compile("<# move 1 to a. #>", { a: null });
+    test.ok(text.indexOf("ws.a = 1;") >= 0);
+    test.ok(text.indexOf("display") == -1);
+};
 
-var text = compile("Hello\r\nWorld");
-assert.ok(text.indexOf('runtime.write("Hello\\r\\nWorld");') >= 0);
+exports['text and embedded code'] = function (test) {
+    var text = compile("Hello <# move 1 to a #> world", { a: null });
+    test.ok(text.indexOf("ws.a = 1;") >= 0);
+    test.ok(text.indexOf('runtime.write("Hello ");') >= 0);
+    test.ok(text.indexOf('runtime.write(" world");') >= 0);
+};
 
-// simple text with quotes
+exports['text with expression'] = function (test) {
+    var text = compile("Hello ${a}", { a: null });
+    test.ok(text.indexOf('runtime.write("Hello ", ws.a);') >= 0);
+};
 
-var text = compile("Hello\"World\"");
-assert.ok(text.indexOf('runtime.write("Hello\\\"World\\\"");') >= 0);
+exports['text with expression and text'] = function (test) {
+    var text = compile("Hello ${a} World", { a: null });
+    test.ok(text.indexOf('runtime.write("Hello ", ws.a, " World");') >= 0);
+};
 
-// embedded code
+exports['text with expression and text from file'] = function (test) {
+    var text = compileFile(path.join(__dirname, '/files/hello.cobt'), { a: null });
+    test.ok(text.indexOf('runtime.write("Hello ", ws.a, " World");') >= 0);
+};
 
-var text = compile("<# move 1 to a. #>", { a: null });
-assert.ok(text.indexOf("ws.a = 1;") >= 0);
-assert.ok(text.indexOf("display") == -1);
-
-// text and embedded code
-
-var text = compile("Hello <# move 1 to a #> world", { a: null });
-assert.ok(text.indexOf("ws.a = 1;") >= 0);
-assert.ok(text.indexOf('runtime.write("Hello ");') >= 0);
-assert.ok(text.indexOf('runtime.write(" world");') >= 0);
-
-// text with expression
-
-var text = compile("Hello ${a}", { a: null });
-assert.ok(text.indexOf('runtime.write("Hello ", ws.a);') >= 0);
-
-// text with expression and text
-
-var text = compile("Hello ${a} World", { a: null });
-assert.ok(text.indexOf('runtime.write("Hello ", ws.a, " World");') >= 0);
-
-// text with expression and text from file
-
-var text = compileFile(path.join(__dirname, '/files/hello.cobt'), { a: null });
-assert.ok(text.indexOf('runtime.write("Hello ", ws.a, " World");') >= 0);

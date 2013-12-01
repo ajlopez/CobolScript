@@ -1,6 +1,5 @@
 
-var cobs = require('../'),
-    assert = require('assert');
+var cobs = require('../');
     
 function run(text, ws) {
     var program = cobs.compileProgram(text, ws);
@@ -12,40 +11,41 @@ function run(text, ws) {
         return null;
 };
 
-// compile and run move
+exports['compile and run move'] = function (test) {
+    var ws = { a: null };
+    var newws = run('move 1 to a.', ws);
+    test.equal(newws.a, 1);
+};
 
-var ws = { a: null };
-var newws = run('move 1 to a.', ws);
-assert.equal(newws.a, 1);
+exports['compile and run two moves'] = function (test) {
+    var ws = { a: null, b: null };
+    var newws = run('move 1 to a. move 2 to b.', ws);
 
-// compile and run two moves
+    test.equal(newws.a, 1);
+    test.equal(newws.b, 2);
+};
 
-var ws = { a: null, b: null };
-var newws = run('move 1 to a. move 2 to b.', ws);
-
-assert.equal(newws.a, 1);
-assert.equal(newws.b, 2);
-
-// compile and run two moves to nested items
-
-var ws = {
-        group: {
-            items: {
-                a: null,
-                b: null
+exports['compile and run two moves to nested items'] = function (test) {
+    var ws = {
+            group: {
+                items: {
+                    a: null,
+                    b: null
+                }
             }
-        }
-    };
-        
-var newws = run('move 1 to a. move 2 to b.', ws);
+        };
+            
+    var newws = run('move 1 to a. move 2 to b.', ws);
 
-assert.equal(newws.group.items.a, 1);
-assert.equal(newws.group.items.b, 2);
+    test.equal(newws.group.items.a, 1);
+    test.equal(newws.group.items.b, 2);
+};
 
-// compile and run move to two variables
+exports['compile and run move to two variables'] = function (test) {
+    var ws = { a: null, b: null };
+    var newws = run('move 1 to a, b.', ws);
 
-var ws = { a: null, b: null };
-var newws = run('move 1 to a, b.', ws);
+    test.equal(newws.a, 1);
+    test.equal(newws.b, 1);
+};
 
-assert.equal(newws.a, 1);
-assert.equal(newws.b, 1);

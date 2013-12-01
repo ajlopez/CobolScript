@@ -1,45 +1,45 @@
 
-var cobs = require('../'),
-    assert = require('assert');
+var cobs = require('../');
 
-// getRuntime is defined
+exports['getRuntime is defined'] = function (test) {
+    test.ok(cobs.getRuntime);
+    test.equal(typeof(cobs.getRuntime), 'function');
+};
 
-assert.ok(cobs.getRuntime);
-assert.equal(typeof(cobs.getRuntime), 'function');
+exports['getRuntime'] = function (test) {
+    var runtime = cobs.getRuntime();
 
-// getRuntime
+    test.ok(runtime);
+    test.ok(runtime.display);
+    test.equal(typeof(runtime.display), 'function');
+    test.ok(runtime.write);
+    test.equal(typeof(runtime.write), 'function');
+    test.ok(runtime.flush);
+    test.equal(typeof(runtime.flush), 'function');
+    test.ok(runtime.getIndex);
+    test.equal(typeof(runtime.getIndex), 'function');
+    test.ok(runtime.setIndex);
+    test.equal(typeof(runtime.setIndex), 'function');
+    test.ok(runtime.global);
+};
 
-var runtime = cobs.getRuntime();
+exports['getRuntime with response, request, require'] = function (test) {
+    var runtime = cobs.getRuntime( { response: {}, request: {}, require: require });
 
-assert.ok(runtime);
-assert.ok(runtime.display);
-assert.equal(typeof(runtime.display), 'function');
-assert.ok(runtime.write);
-assert.equal(typeof(runtime.write), 'function');
-assert.ok(runtime.flush);
-assert.equal(typeof(runtime.flush), 'function');
-assert.ok(runtime.getIndex);
-assert.equal(typeof(runtime.getIndex), 'function');
-assert.ok(runtime.setIndex);
-assert.equal(typeof(runtime.setIndex), 'function');
-assert.ok(runtime.global);
+    test.ok(runtime);
+    test.ok(runtime.display);
+    test.equal(typeof(runtime.display), 'function');
+    test.ok(runtime.write);
+    test.equal(typeof(runtime.write), 'function');
+    test.ok(runtime.flush);
+    test.equal(typeof(runtime.flush), 'function');
+    test.ok(runtime.getIndex);
+    test.equal(typeof(runtime.getIndex), 'function');
+    test.ok(runtime.setIndex);
+    test.equal(typeof(runtime.setIndex), 'function');
+    test.ok(runtime.response);
+    test.ok(runtime.request);
+    test.ok(runtime.global);
+    test.ok(runtime.require);
+};
 
-// getRuntime with response, request, require
-
-var runtime = cobs.getRuntime( { response: {}, request: {}, require: require });
-
-assert.ok(runtime);
-assert.ok(runtime.display);
-assert.equal(typeof(runtime.display), 'function');
-assert.ok(runtime.write);
-assert.equal(typeof(runtime.write), 'function');
-assert.ok(runtime.flush);
-assert.equal(typeof(runtime.flush), 'function');
-assert.ok(runtime.getIndex);
-assert.equal(typeof(runtime.getIndex), 'function');
-assert.ok(runtime.setIndex);
-assert.equal(typeof(runtime.setIndex), 'function');
-assert.ok(runtime.response);
-assert.ok(runtime.request);
-assert.ok(runtime.global);
-assert.ok(runtime.require);

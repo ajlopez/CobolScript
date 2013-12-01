@@ -1,6 +1,5 @@
 
-var cobs = require('../'),
-    assert = require('assert');
+var cobs = require('../');
     
 function run(text, ws) {
     var program = cobs.compileProgram(text, ws);
@@ -9,15 +8,15 @@ function run(text, ws) {
     return data.working_storage;
 };
 
-// simple if
+exports['simple if'] = function (test) {
+    var ws = { a: 1 };
+    var newws = run('if a > 0 then move 0 to a.', ws);
+    test.equal(newws.a, 0);
+};
 
-var ws = { a: 1 };
-var newws = run('if a > 0 then move 0 to a.', ws);
-assert.equal(newws.a, 0);
-
-// if with two commands
-
-var ws = { a: 1, b: 2 };
-var newws = run('if a > 0 then move 0 to a move 1 to b.', ws);
-assert.equal(newws.a, 0);
-assert.equal(newws.b, 1);
+exports['if with two commands'] = function (test) {
+    var ws = { a: 1, b: 2 };
+    var newws = run('if a > 0 then move 0 to a move 1 to b.', ws);
+    test.equal(newws.a, 0);
+    test.equal(newws.b, 1);
+};
