@@ -1,8 +1,8 @@
 
-var cobs = require('../').complete();
+var parsers = require('../lib/parsers');
 
 exports['Working storage with one variable'] = function (test) {
-    var parser = new cobs.Parser('\
+    var parser = parsers.createParser('\
 DATA DIVISION.\r\n\
 WORKING-STORAGE SECTION.\r\n\
 01 ITEM.\r\n\
@@ -17,7 +17,7 @@ WORKING-STORAGE SECTION.\r\n\
 };
 
 exports['Working storage with two variables'] = function (test) {
-    var parser = new cobs.Parser('\
+    var parser = parsers.createParser('\
 DATA DIVISION.\r\n\
 WORKING-STORAGE SECTION.\r\n\
 01 ITEM1.\r\n\
@@ -34,7 +34,7 @@ WORKING-STORAGE SECTION.\r\n\
 };
 
 exports['Working storage with group item and two subitems'] = function (test) {
-    var parser = new cobs.Parser('\
+    var parser = parsers.createParser('\
 DATA DIVISION.\r\n\
 WORKING-STORAGE SECTION.\r\n\
 01 GROUP1.\r\n\
@@ -53,7 +53,7 @@ WORKING-STORAGE SECTION.\r\n\
 };
 
 exports['Working storage with two group items and three levels'] = function (test) {
-    var parser = new cobs.Parser('\
+    var parser = parsers.createParser('\
 DATA DIVISION.\r\n\
 WORKING-STORAGE SECTION.\r\n\
 01 GROUP1.\r\n\
