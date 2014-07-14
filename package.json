@@ -12,6 +12,6 @@
 , "dependencies": {
   }
 , "devDependencies": {
-    "simpleunit": "0.0.2"
+    "simpleunit": "0.0.4"
   }
 }
