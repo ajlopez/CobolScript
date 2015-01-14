@@ -4,7 +4,7 @@ COBOL language compiler to Javascript. Work in Progress
 
 ## Installation
 
-Via npm using (Node.js)[http://nodejs.org]:
+Via npm using [Node.js](http://nodejs.org):
 ```
 npm install cobolscript
 ```
@@ -110,7 +110,7 @@ npm test
 ## Contribution
 
 Feel free to [file issues](https://github.com/ajlopez/CobolScript) and submit
-[pull requests](https://github.com/ajlopez/CobolScript/pulls) — contributions are
+[pull requests](https://github.com/ajlopez/CobolScript/pulls) â€” contributions are
 welcome.
 
 If you submit a pull request, please be sure to add or update corresponding
