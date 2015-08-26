@@ -1,0 +1,1 @@
+var cobs = require('../..'),    fs = require('fs');    function compileFile(filename) {    return cobs.compileProgramFile(filename).compileText();};process.argv.forEach(function(val) {    if (val.slice(-4) == ".cob")        console.log(compileFile(val));});
