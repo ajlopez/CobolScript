@@ -22,6 +22,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "jest": "^25.2.7",
     "simpleunit": "0.0.4"
   }
 }
