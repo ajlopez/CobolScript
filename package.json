@@ -18,7 +18,8 @@
     "node": ">= 0.6.0 && < 0.9.0"
   },
   "scripts": {
-    "test": "simpleunit test"
+    "test": "simpleunit test",
+    "jest": "jest --rootDir=test"
   },
   "dependencies": {},
   "devDependencies": {
