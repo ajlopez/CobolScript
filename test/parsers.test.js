@@ -10,17 +10,18 @@ it('Parse simple command', () => {
     var parser = parsers.createParser('DISPLAY "HELLO, WORLD".');
     var cmd = parser.parseCommand();
     expect(!!cmd).toBe(true);
-    
-    assert.equal('runtime.display("HELLO, WORLD");', cmd.compile());
-    assert.equal(null, parser.parseCommand());
+
+    expect(cmd.compile()).toEqual('runtime.display("HELLO, WORLD");')
+    expect(parser.parseCommand()).not.toBeDefined()
 });
 
 it('No point at end', () => {
     var parser = parsers.createParser('DISPLAY "HELLO, WORLD"');
     var cmd = parser.parseCommand();
     expect(!!cmd).toBe(true);
-    assert.equal('runtime.display("HELLO, WORLD");', cmd.compile());
-    assert.equal(null, parser.parseCommand());
+    
+    expect(cmd.compile()).toEqual('runtime.display("HELLO, WORLD");')
+    expect(parser.parseCommand()).not.toBeDefined()
 });
 
 it('Raise if extraneous char at end', () => {
