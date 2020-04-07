@@ -1,17 +1,27 @@
-{ "name": "cobolscript"
-, "description": "COBOL compiler to JavaScript"
-, "keywords": [ "cobol", "interpreter", "compiler", "javascript" ]
-, "version": "0.0.1"
-, "author": "Angel 'Java' Lopez <webmaster@ajlopez.com> (http://www.ajlopez.com)"
-, "repository": { "type": "git", "url": "git://github.com/ajlopez/CobolScript.git" }
-, "main": "./lib/cobolscript.js"
-, "engines": { "node": ">= 0.6.0 && < 0.9.0" }
-, "scripts": {
+{
+  "name": "cobolscript",
+  "description": "COBOL compiler to JavaScript",
+  "keywords": [
+    "cobol",
+    "interpreter",
+    "compiler",
+    "javascript"
+  ],
+  "version": "0.0.1",
+  "author": "Angel 'Java' Lopez <webmaster@ajlopez.com> (http://www.ajlopez.com)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ajlopez/CobolScript.git"
+  },
+  "main": "./lib/cobolscript.js",
+  "engines": {
+    "node": ">= 0.6.0 && < 0.9.0"
+  },
+  "scripts": {
     "test": "simpleunit test"
-  }
-, "dependencies": {
-  }
-, "devDependencies": {
+  },
+  "dependencies": {},
+  "devDependencies": {
     "simpleunit": "0.0.4"
   }
 }
