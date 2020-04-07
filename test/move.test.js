@@ -14,15 +14,15 @@ function run(text, ws) {
 it('compile and run move', () => {
     var ws = { a: null };
     var newws = run('move 1 to a.', ws);
-    test.equal(newws.a, 1);
+    expect(newws.a).toEqual(1)
 });
 
 it('compile and run two moves', () => {
     var ws = { a: null, b: null };
     var newws = run('move 1 to a. move 2 to b.', ws);
 
-    test.equal(newws.a, 1);
-    test.equal(newws.b, 2);
+    expect(newws.a).toEqual(1)
+    expect(newws.b).toEqual(2)
 });
 
 it('compile and run two moves to nested items', () => {
@@ -37,15 +37,15 @@ it('compile and run two moves to nested items', () => {
             
     var newws = run('move 1 to a. move 2 to b.', ws);
 
-    test.equal(newws.group.items.a, 1);
-    test.equal(newws.group.items.b, 2);
+    expect(newws.group.items.a).toEqual(1)
+    expect(newws.group.items.b).toEqual(2)
 });
 
 it('compile and run move to two variables', () => {
     var ws = { a: null, b: null };
     var newws = run('move 1 to a, b.', ws);
 
-    test.equal(newws.a, 1);
-    test.equal(newws.b, 1);
+    expect(newws.a).toEqual(1)
+    expect(newws.b).toEqual(1)
 });
 

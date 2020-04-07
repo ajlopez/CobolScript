@@ -1,5 +1,6 @@
 
 var lexers = require('../lib/lexers');
+const assert = require('assert')
     
 var TokenType = lexers.TokenType;
 
@@ -7,31 +8,31 @@ function getToken(text, value, type, test)
 {
     var lexer = lexers.createLexer(text);
     assertToken(lexer, value, type, test);
-    test.equal(lexer.nextToken(), null);
+    expect(lexer.nextToken()).toEqual(null)
 }
 
 function assertToken(lexer, value, type, test)
 {
     var token = lexer.nextToken();
-    test.ok(token);
-    test.equal(token.value, value);
-    test.equal(token.type, type);
+    expect(!!token).toBe(true);
+    expect(token.value).toEqual(value)
+    expect(token.type).toEqual(type)
 }
     
 it('Lexer defined', () => {
-    test.ok(lexers.createLexer);
+    expect(!!lexers.createLexer).toBe(true);
 });
 
 it('Null token if null text', () => {
     var lexer = lexers.createLexer(null);
 
-    test.equal(lexer.nextToken(), null);
+    expect(lexer.nextToken()).toEqual(null)
 });
 
 it('Null token if empty text', () => {
     var lexer = lexers.createLexer('');
 
-    test.equal(lexer.nextToken(), null);
+    expect(lexer.nextToken()).toEqual(null)
 });
 
 it('Get simple name', () => {
@@ -39,7 +40,7 @@ it('Get simple name', () => {
 
     assertToken(lexer, 'DIVISION', TokenType.Name, test);
 
-    test.equal(lexer.nextToken(), null);
+    expect(lexer.nextToken()).toEqual(null)
 });
 
 it('Get simple name with spaces', () => {
@@ -47,7 +48,7 @@ it('Get simple name with spaces', () => {
 
     assertToken(lexer, 'DIVISION', TokenType.Name, test);
 
-    test.equal(null, lexer.nextToken());
+    expect(null).toEqual(lexer.nextToken())
 });
 
 it('Get simple name with digits', () => {
@@ -55,7 +56,7 @@ it('Get simple name with digits', () => {
 
     assertToken(lexer, 'ITEM01', TokenType.Name, test);
 
-    test.equal(lexer.nextToken(), null);
+    expect(lexer.nextToken()).toEqual(null)
 });
 
 it('Get two simple names', () => {
@@ -64,7 +65,7 @@ it('Get two simple names', () => {
     assertToken(lexer, 'IDENTIFICATION', TokenType.Name, test);
     assertToken(lexer, 'DIVISION', TokenType.Name, test);
 
-    test.equal(lexer.nextToken(), null);
+    expect(lexer.nextToken()).toEqual(null)
 });
 
 it('Get name with minus sign', () => {
@@ -72,7 +73,7 @@ it('Get name with minus sign', () => {
 
     assertToken(lexer, 'WORKING-STORAGE', TokenType.Name, test);
 
-    test.equal(null, lexer.nextToken());
+    expect(null).toEqual(lexer.nextToken())
 });
 
 it('Get integer number', () => {
@@ -80,7 +81,7 @@ it('Get integer number', () => {
 
     assertToken(lexer, '123', TokenType.Integer, test);
 
-    test.equal(null, lexer.nextToken());
+    expect(null).toEqual(lexer.nextToken())
 });
 
 it('Get integer number with leading zeroes', () => {
@@ -88,7 +89,7 @@ it('Get integer number with leading zeroes', () => {
 
     assertToken(lexer, '003', TokenType.Integer, test);
 
-    test.equal(lexer.nextToken(), null);
+    expect(lexer.nextToken()).toEqual(null)
 });
 
 it('Get simple string', () => {
@@ -102,7 +103,7 @@ it('Get simple string with quote', () => {
 it('Raise if unclosed string', () => {
     var lexer = lexers.createLexer('"ADAM');
 
-    test.throws(
+    assert.throws(
         function() {
             assertToken(lexer, 'ADAM', TokenType.String, test);
         },
@@ -114,7 +115,7 @@ it('Raise if unclosed string', () => {
 it('Raise if unexpected character', () => {
     var lexer = lexers.createLexer('!');
 
-    test.throws(
+    assert.throws(
         function() {
             assertToken(lexer, '!', TokenType.String, test);
         },
@@ -147,19 +148,19 @@ it('Skip two line comments', () => {
 it('Get Phrase', () => {
     var lexer = lexers.createLexer("HELLO.");
 
-    test.equal(lexer.nextPhrase(), "HELLO");
+    expect(lexer.nextPhrase()).toEqual("HELLO")
 });
 
 it('Get Phrase with initial spaces and end of line', () => {
     var lexer = lexers.createLexer("   HELLO.\r\n");
 
-    test.equal(lexer.nextPhrase(), "HELLO");
+    expect(lexer.nextPhrase()).toEqual("HELLO")
 });
 
 it('Get Phrase with inner points', () => {
     var lexer = lexers.createLexer("A.J.LOPEZ.\r\n");
 
-    test.equal(lexer.nextPhrase(), "A.J.LOPEZ");
+    expect(lexer.nextPhrase()).toEqual("A.J.LOPEZ")
 });
 
 it('Get comparison operators', () => {

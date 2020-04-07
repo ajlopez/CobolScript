@@ -25,49 +25,49 @@ function compileFile(filename, ws) {
 }
 
 it('compileTemplate defined', () => {
-    test.ok(cobs.compileTemplate);
+    expect(!!cobs.compileTemplate).toBe(true);
 });
 
 it('compile simple text', () => {
     var text = compile("Hello");
-    test.ok(text.indexOf('runtime.write("Hello");') >= 0);
+    expect(!!text.indexOf('runtime.write("Hello");') >= 0).toBe(true);
 });
 
 it('simple text with \r \n', () => {
     var text = compile("Hello\r\nWorld");
-    test.ok(text.indexOf('runtime.write("Hello\\r\\nWorld");') >= 0);
+    expect(!!text.indexOf('runtime.write("Hello\\r\\nWorld");') >= 0).toBe(true);
 });
 
 it('simple text with quotes', () => {
     var text = compile("Hello\"World\"");
-    test.ok(text.indexOf('runtime.write("Hello\\\"World\\\"");') >= 0);
+    expect(!!text.indexOf('runtime.write("Hello\\\"World\\\"");') >= 0).toBe(true);
 });
 
 it('embedded code', () => {
     var text = compile("<# move 1 to a. #>", { a: null });
-    test.ok(text.indexOf("ws.a = 1;") >= 0);
-    test.ok(text.indexOf("display") == -1);
+    expect(!!text.indexOf("ws.a = 1;") >= 0).toBe(true);
+    expect(!!(text.indexOf("display") == -1)).toBe(true);
 });
 
 it('text and embedded code', () => {
     var text = compile("Hello <# move 1 to a #> world", { a: null });
-    test.ok(text.indexOf("ws.a = 1;") >= 0);
-    test.ok(text.indexOf('runtime.write("Hello ");') >= 0);
-    test.ok(text.indexOf('runtime.write(" world");') >= 0);
+    expect(!!text.indexOf("ws.a = 1;") >= 0).toBe(true);
+    expect(!!text.indexOf('runtime.write("Hello ");') >= 0).toBe(true);
+    expect(!!text.indexOf('runtime.write(" world");') >= 0).toBe(true);
 });
 
 it('text with expression', () => {
     var text = compile("Hello ${a}", { a: null });
-    test.ok(text.indexOf('runtime.write("Hello ", ws.a);') >= 0);
+    expect(!!text.indexOf('runtime.write("Hello ", ws.a);') >= 0).toBe(true);
 });
 
 it('text with expression and text', () => {
     var text = compile("Hello ${a} World", { a: null });
-    test.ok(text.indexOf('runtime.write("Hello ", ws.a, " World");') >= 0);
+    expect(!!text.indexOf('runtime.write("Hello ", ws.a, " World");') >= 0).toBe(true);
 });
 
 it('text with expression and text from file', () => {
     var text = compileFile(path.join(__dirname, '/files/hello.cobt'), { a: null });
-    test.ok(text.indexOf('runtime.write("Hello ", ws.a, " World");') >= 0);
+    expect(!!text.indexOf('runtime.write("Hello ", ws.a, " World");') >= 0).toBe(true);
 });
 

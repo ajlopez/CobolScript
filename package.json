@@ -19,7 +19,7 @@
   },
   "scripts": {
     "test": "simpleunit test",
-    "jest": "jest --rootDir=test"
+    "jest": "jest --rootDir=test --watch"
   },
   "dependencies": {},
   "devDependencies": {

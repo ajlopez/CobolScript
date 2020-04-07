@@ -10,10 +10,10 @@ WORKING-STORAGE SECTION.\r\n\
 
     var program = parser.parseProgram();
 
-    test.ok(program);
-    test.ok(program.data);
-    test.ok(program.data.working_storage);
-    test.ok(typeof(program.data.working_storage.item) != 'undefined');
+    expect(!!program).toBe(true);
+    expect(!!program.data).toBe(true);
+    expect(!!program.data.working_storage).toBe(true);
+    expect(!!typeof(program.data.working_storage.item) != 'undefined').toBe(true);
 });
 
 it('Working storage with two variables', () => {
@@ -26,11 +26,11 @@ WORKING-STORAGE SECTION.\r\n\
 
     var program = parser.parseProgram();
 
-    test.ok(program);
-    test.ok(program.data);
-    test.ok(program.data.working_storage);
-    test.ok(typeof(program.data.working_storage.item1) != 'undefined');
-    test.ok(typeof(program.data.working_storage.item2) != 'undefined');
+    expect(!!program).toBe(true);
+    expect(!!program.data).toBe(true);
+    expect(!!program.data.working_storage).toBe(true);
+    expect(!!typeof(program.data.working_storage.item1) != 'undefined').toBe(true);
+    expect(!!typeof(program.data.working_storage.item2) != 'undefined').toBe(true);
 });
 
 it('Working storage with group item and two subitems', () => {
@@ -44,12 +44,12 @@ WORKING-STORAGE SECTION.\r\n\
 
     var program = parser.parseProgram();
 
-    test.ok(program);
-    test.ok(program.data);
-    test.ok(program.data.working_storage);
-    test.ok(typeof(program.data.working_storage.group1) != 'undefined');
-    test.ok(typeof(program.data.working_storage.group1.item1) != 'undefined');
-    test.ok(typeof(program.data.working_storage.group1.item2) != 'undefined');
+    expect(!!program).toBe(true);
+    expect(!!program.data).toBe(true);
+    expect(!!program.data.working_storage).toBe(true);
+    expect(!!typeof(program.data.working_storage.group1) != 'undefined').toBe(true);
+    expect(!!typeof(program.data.working_storage.group1.item1) != 'undefined').toBe(true);
+    expect(!!typeof(program.data.working_storage.group1.item2) != 'undefined').toBe(true);
 });
 
 it('Working storage with two group items and three levels', () => {
@@ -68,16 +68,16 @@ WORKING-STORAGE SECTION.\r\n\
 
     var program = parser.parseProgram();
 
-    test.ok(program);
-    test.ok(program.data);
-    test.ok(program.data.working_storage);
-    test.ok(program.data.working_storage.group1);
-    test.ok(program.data.working_storage.group1.item1);
-    test.ok(typeof(program.data.working_storage.group1.item1.subitem1) != 'undefined');
-    test.ok(typeof(program.data.working_storage.group1.item1.subitem2) != 'undefined');
-    test.ok(typeof(program.data.working_storage.group1.item2) != 'undefined');
-    test.ok(program.data.working_storage.group2);
-    test.ok(typeof(program.data.working_storage.group2.item1) != 'undefined');
-    test.ok(typeof(program.data.working_storage.group2.item2) != 'undefined');
+    expect(!!program).toBe(true);
+    expect(!!program.data).toBe(true);
+    expect(!!program.data.working_storage).toBe(true);
+    expect(!!program.data.working_storage.group1).toBe(true);
+    expect(!!program.data.working_storage.group1.item1).toBe(true);
+    expect(!!typeof(program.data.working_storage.group1.item1.subitem1) != 'undefined').toBe(true);
+    expect(!!typeof(program.data.working_storage.group1.item1.subitem2) != 'undefined').toBe(true);
+    expect(!!typeof(program.data.working_storage.group1.item2) != 'undefined').toBe(true);
+    expect(!!program.data.working_storage.group2).toBe(true);
+    expect(!!typeof(program.data.working_storage.group2.item1) != 'undefined').toBe(true);
+    expect(!!typeof(program.data.working_storage.group2.item2) != 'undefined').toBe(true);
 });
 

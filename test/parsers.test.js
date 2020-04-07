@@ -1,30 +1,32 @@
 
 var parsers = require('../lib/parsers');
+const assert = require('assert');
 
 it('Create parser defined', () => {
-    test.ok(parsers.createParser);
+    expect(!!parsers.createParser).toBe(true);
 });
 
 it('Parse simple command', () => {
     var parser = parsers.createParser('DISPLAY "HELLO, WORLD".');
     var cmd = parser.parseCommand();
-    test.ok(cmd);
-    test.equal('runtime.display("HELLO, WORLD");', cmd.compile());
-    test.equal(null, parser.parseCommand());
+    expect(!!cmd).toBe(true);
+    
+    assert.equal('runtime.display("HELLO, WORLD");', cmd.compile());
+    assert.equal(null, parser.parseCommand());
 });
 
 it('No point at end', () => {
     var parser = parsers.createParser('DISPLAY "HELLO, WORLD"');
     var cmd = parser.parseCommand();
-    test.ok(cmd);
-    test.equal('runtime.display("HELLO, WORLD");', cmd.compile());
-    test.equal(null, parser.parseCommand());
+    expect(!!cmd).toBe(true);
+    assert.equal('runtime.display("HELLO, WORLD");', cmd.compile());
+    assert.equal(null, parser.parseCommand());
 });
 
 it('Raise if extraneous char at end', () => {
     var parser = parsers.createParser('DISPLAY "HELLO, WORLD"!');
 
-    test.throws(
+    assert.throws(
         function() {
             parser.parseCommand();
         },
@@ -41,17 +43,17 @@ IDENTIFICATION DIVISION.\r\n\
 
     var program = parser.parseProgram();
 
-    test.ok(program);
-    test.ok(program.identification);
-    test.ok(program.identification.program_id);
-    test.equal(program.identification.program_id, "HELLO");
+    expect(!!program).toBe(true);
+    expect(!!program.identification).toBe(true);
+    expect(!!program.identification.program_id).toBe(true);
+    expect(program.identification.program_id).toEqual("HELLO")
 });
 
 it('Parse commands', () => {
     var parser = parsers.createParser('display "hello". display "world".');
 
     var commands = parser.parseCommands();
-    test.ok(commands);
+    expect(!!commands).toBe(true);
 });
  
 it('Parse Identification Division', () => {
@@ -66,14 +68,14 @@ IDENTIFICATION DIVISION.\r\n\
 
     var program = parser.parseProgram();
 
-    test.ok(program);
-    test.ok(program.identification);
-    test.ok(program.identification.program_id);
-    test.equal(program.identification.program_id, "HELLO");
-    test.equal(program.identification.author, "A.J.LOPEZ");
-    test.equal(program.identification.installation, "TEST");
-    test.equal(program.identification.date_written, "2012-12-22");
-    test.equal(program.identification.date_compiled, "2012-12-22");
+    expect(!!program).toBe(true);
+    expect(!!program.identification).toBe(true);
+    expect(!!program.identification.program_id).toBe(true);
+    expect(program.identification.program_id).toEqual("HELLO")
+    expect(program.identification.author).toEqual("A.J.LOPEZ")
+    expect(program.identification.installation).toEqual("TEST")
+    expect(program.identification.date_written).toEqual("2012-12-22")
+    expect(program.identification.date_compiled).toEqual("2012-12-22")
 });
  
 it('Parse Identification Division + Environment Division', () => {
@@ -92,19 +94,19 @@ ENVIRONMENT DIVISION.\r\n\
 
     var program = parser.parseProgram();
 
-    test.ok(program);
-    test.ok(program.identification);
-    test.ok(program.identification.program_id);
-    test.equal(program.identification.program_id, "HELLO");
-    test.equal(program.identification.author, "A.J.LOPEZ");
-    test.equal(program.identification.installation, "TEST");
-    test.equal(program.identification.date_written, "2012-12-22");
-    test.equal(program.identification.date_compiled, "2012-12-22");
+    expect(!!program).toBe(true);
+    expect(!!program.identification).toBe(true);
+    expect(!!program.identification.program_id).toBe(true);
+    expect(program.identification.program_id).toEqual("HELLO")
+    expect(program.identification.author).toEqual("A.J.LOPEZ")
+    expect(program.identification.installation).toEqual("TEST")
+    expect(program.identification.date_written).toEqual("2012-12-22")
+    expect(program.identification.date_compiled).toEqual("2012-12-22")
 
-    test.ok(program.environment);
-    test.ok(program.environment.configuration);
-    test.equal(program.environment.configuration.source_computer, "NODE");
-    test.equal(program.environment.configuration.object_computer, "NODE");
+    expect(!!program.environment).toBe(true);
+    expect(!!program.environment.configuration).toBe(true);
+    expect(program.environment.configuration.source_computer).toEqual("NODE")
+    expect(program.environment.configuration.object_computer).toEqual("NODE")
 });
 
 it('Parse Identification Division + Environment Division + Empty Data Division + Procedure Division', () => { 
@@ -126,21 +128,21 @@ PROCEDURE DIVISION.\r\n\
 
     var program = parser.parseProgram();
 
-    test.ok(program);
-    test.ok(program.identification);
-    test.ok(program.identification.program_id);
-    test.equal(program.identification.program_id, "HELLO");
-    test.equal(program.identification.author, "A.J.LOPEZ");
-    test.equal(program.identification.installation, "TEST");
-    test.equal(program.identification.date_written, "2012-12-22");
-    test.equal(program.identification.date_compiled, "2012-12-22");
+    expect(!!program).toBe(true);
+    expect(!!program.identification).toBe(true);
+    expect(!!program.identification.program_id).toBe(true);
+    expect(program.identification.program_id).toEqual("HELLO")
+    expect(program.identification.author).toEqual("A.J.LOPEZ")
+    expect(program.identification.installation).toEqual("TEST")
+    expect(program.identification.date_written).toEqual("2012-12-22")
+    expect(program.identification.date_compiled).toEqual("2012-12-22")
 
-    test.ok(program.environment);
-    test.ok(program.environment.configuration);
-    test.equal(program.environment.configuration.source_computer, "NODE");
-    test.equal(program.environment.configuration.object_computer, "NODE");
+    expect(!!program.environment).toBe(true);
+    expect(!!program.environment.configuration).toBe(true);
+    expect(program.environment.configuration.source_computer).toEqual("NODE")
+    expect(program.environment.configuration.object_computer).toEqual("NODE")
 
-    test.ok(program.data);
-    test.ok(program.command);
+    expect(!!program.data).toBe(true);
+    expect(!!program.command).toBe(true);
 });
 
